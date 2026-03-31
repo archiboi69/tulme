@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TULME STUDIO — Modern Ibiza</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+            --white: #FFFFFF;
+            --offwhite: #FAFAFA;
+            --stone: #E8E4DF;
+            --pool: #5FB8C2;
+            --charcoal: #1A1A1A;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--white);
+            color: var(--charcoal);
+            font-weight: 400;
+        }
+
+        /* Animations */
+        @keyframes fade-up {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-fade-up {
+            opacity: 0;
+            animation: fade-up 0.8s var(--ease-out) forwards;
+        }
+        .animate-float {
+            animation: float 4s ease-in-out infinite;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+
+        /* Buttons */
+        .btn-pool {
+            background: var(--pool);
+            color: white;
+            transition: background 300ms ease, transform 160ms var(--ease-out), box-shadow 300ms ease;
+        }
+        .btn-pool:hover {
+            background: #4CA5AF;
+            box-shadow: 0 12px 40px rgba(95, 184, 194, 0.35);
+        }
+        .btn-pool:active { transform: scale(0.98); }
+
+        .btn-minimal {
+            background: var(--charcoal);
+            color: white;
+            transition: all 300ms ease;
+        }
+        .btn-minimal:hover {
+            background: #333;
+        }
+
+        /* Cards */
+        .card-ibiza {
+            background: var(--offwhite);
+            border-radius: 24px;
+            transition: transform 400ms var(--ease-out), box-shadow 400ms ease;
+        }
+        .card-ibiza:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+
+        /* Image styling */
+        .image-ibiza {
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .image-ibiza img {
+            transition: transform 700ms var(--ease-out);
+        }
+        .image-ibiza:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Pool gradient */
+        .pool-gradient {
+            background: linear-gradient(135deg, #5FB8C2 0%, #7DD3DD 100%);
+        }
+
+        /* Number styling */
+        .number-outline {
+            -webkit-text-stroke: 1px #5FB8C2;
+            color: transparent;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <a href="index.html" class="text-xl font-semibold animate-fade-up">tulme</a>
+            <div class="hidden md:flex items-center gap-10 text-sm">
+                <a href="#about" class="hover:text-[#5FB8C2] transition-colors animate-fade-up delay-1">About</a>
+                <a href="#services" class="hover:text-[#5FB8C2] transition-colors animate-fade-up delay-2">Services</a>
+                <a href="#process" class="hover:text-[#5FB8C2] transition-colors animate-fade-up delay-3">Process</a>
+                <button class="btn-pool px-6 py-2.5 rounded-full text-sm font-medium animate-fade-up delay-4">Contact</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="min-h-screen pt-28 pb-20 px-6 md:px-12 flex items-center">
+        <div class="max-w-7xl mx-auto w-full">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <!-- Content -->
+                <div>
+                    <div class="inline-flex items-center gap-2 bg-[#F5F5F5] rounded-full px-4 py-2 mb-8 animate-fade-up">
+                        <span class="w-1.5 h-1.5 rounded-full bg-[#5FB8C2]"></span>
+                        <span class="text-xs font-medium tracking-wider uppercase">Poland → Costa Blanca</span>
+                    </div>
+
+                    <h1 class="text-6xl md:text-7xl lg:text-8xl font-semibold leading-[0.95] tracking-tight mb-8 animate-fade-up delay-1">
+                        Design<br>
+                        <span class="text-[#5FB8C2]">Source</span><br>
+                        Deliver
+                    </h1>
+
+                    <p class="text-lg text-[#666] max-w-sm mb-10 leading-relaxed animate-fade-up delay-2">
+                        European precision meets Mediterranean minimalism. Premium sourcing for your modern Spanish retreat.
+                    </p>
+
+                    <div class="flex gap-4 animate-fade-up delay-3">
+                        <button class="btn-pool px-8 py-4 rounded-full font-medium">Start Project</button>
+                        <button class="btn-minimal px-8 py-4 rounded-full font-medium">Learn More</button>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="relative animate-fade-up delay-2">
+                    <div class="image-ibiza aspect-square">
+                        <img src="https://images.unsplash.com/photo-1613490493576-7fde63acd811?w=800&q=80" 
+                             alt="Modern villa with pool" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- Floating badge -->
+                    <div class="absolute -bottom-6 left-6 bg-white rounded-2xl p-5 shadow-xl animate-float">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 pool-gradient rounded-full flex items-center justify-center">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="font-semibold">No Delays</p>
+                                <p class="text-xs text-[#999]">European reliability</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats row -->
+            <div class="grid grid-cols-3 gap-8 mt-20 pt-12 border-t border-[#E8E4DF] animate-fade-up delay-4">
+                <div>
+                    <span class="text-4xl md:text-5xl font-semibold text-[#5FB8C2]">100%</span>
+                    <p class="text-sm text-[#999] mt-2">Quality Verified</p>
+                </div>
+                <div>
+                    <span class="text-4xl md:text-5xl font-semibold text-[#5FB8C2]">Direct</span>
+                    <p class="text-sm text-[#999] mt-2">Factory Access</p>
+                </div>
+                <div>
+                    <span class="text-4xl md:text-5xl font-semibold text-[#5FB8C2]">Zero</span>
+                    <p class="text-sm text-[#999] mt-2">Middlemen</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-24 px-6 md:px-12 bg-[#FAFAFA]">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="reveal">
+                    <p class="text-sm tracking-wider uppercase text-[#5FB8C2] mb-4">The Studio</p>
+                    <h2 class="text-4xl md:text-5xl font-semibold leading-tight mb-6">
+                        Clean lines.<br>Clear process.
+                    </h2>
+                    <p class="text-[#666] leading-relaxed mb-6">
+                        Poland is one of the world's leading exporters of high-quality furniture and construction materials. Generations of craftsmanship meet cutting-edge technology.
+                    </p>
+                    <p class="text-[#666] leading-relaxed mb-8">
+                        For modern villas in Spain, this means access to an unrivaled price-to-quality ratio. Not cutting corners—intelligent sourcing.
+                    </p>
+
+                    <div class="flex gap-8">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 pool-gradient rounded-xl flex items-center justify-center">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                            </div>
+                            <span class="text-sm font-medium">Bulletproof Supply Chain</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4 reveal">
+                    <div class="image-ibiza aspect-[3/4]">
+                        <img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=500&q=80" alt="Modern interior" class="w-full h-full object-cover">
+                    </div>
+                    <div class="image-ibiza aspect-[3/4] mt-8">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=500&q=80" alt="Minimalist design" class="w-full h-full object-cover">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-24 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <p class="text-sm tracking-wider uppercase text-[#5FB8C2] mb-4">Services</p>
+                <h2 class="text-4xl md:text-5xl font-semibold">What we deliver</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card-ibiza p-8 reveal">
+                    <span class="text-5xl font-bold number-outline">01</span>
+                    <h3 class="text-lg font-semibold mt-6 mb-3">Bespoke Carpentry</h3>
+                    <p class="text-sm text-[#666]">Custom kitchens, wardrobes, built-ins. Quality rivaling top Italian brands.</p>
+                </div>
+
+                <div class="card-ibiza p-8 reveal">
+                    <span class="text-5xl font-bold number-outline">02</span>
+                    <h3 class="text-lg font-semibold mt-6 mb-3">Window Systems</h3>
+                    <p class="text-sm text-[#666]">High-performance including passive house standards for Spanish climate.</p>
+                </div>
+
+                <div class="card-ibiza p-8 reveal">
+                    <span class="text-5xl font-bold number-outline">03</span>
+                    <h3 class="text-lg font-semibold mt-6 mb-3">Premium Furniture</h3>
+                    <p class="text-sm text-[#666]">World-class sofas, beds. High-end fabrics, ergonomic designs.</p>
+                </div>
+
+                <div class="card-ibiza p-8 reveal">
+                    <span class="text-5xl font-bold number-outline">04</span>
+                    <h3 class="text-lg font-semibold mt-6 mb-3">Full Logistics</h3>
+                    <p class="text-sm text-[#666]">Factory to Costa Blanca. Sourcing, QC, transport, delivery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process" class="py-24 px-6 md:px-12 pool-gradient text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <p class="text-sm tracking-wider uppercase text-white/70 mb-4">Process</p>
+                <h2 class="text-4xl md:text-5xl font-semibold">Simple & transparent</h2>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 mx-auto bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6">
+                        <span class="text-2xl font-semibold">1</span>
+                    </div>
+                    <h3 class="font-semibold mb-2">Source</h3>
+                    <p class="text-sm text-white/70">Direct factory access</p>
+                </div>
+
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 mx-auto bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6">
+                        <span class="text-2xl font-semibold">2</span>
+                    </div>
+                    <h3 class="font-semibold mb-2">Verify</h3>
+                    <p class="text-sm text-white/70">Quality control</p>
+                </div>
+
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 mx-auto bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6">
+                        <span class="text-2xl font-semibold">3</span>
+                    </div>
+                    <h3 class="font-semibold mb-2">Ship</h3>
+                    <p class="text-sm text-white/70">Secure transport</p>
+                </div>
+
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 mx-auto bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6">
+                        <span class="text-2xl font-semibold">4</span>
+                    </div>
+                    <h3 class="font-semibold mb-2">Deliver</h3>
+                    <p class="text-sm text-white/70">On-site in Spain</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="py-16 px-6 md:px-12 border-y border-[#E8E4DF]">
+        <div class="max-w-7xl mx-auto text-center reveal">
+            <p class="text-sm tracking-wider uppercase text-[#999] mb-8">Partner Network</p>
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16">
+                <span class="text-lg font-medium text-[#CCC] hover:text-[#5FB8C2] transition-colors">Grohe</span>
+                <span class="text-lg font-medium text-[#CCC] hover:text-[#5FB8C2] transition-colors">Ronal</span>
+                <span class="text-lg font-medium text-[#CCC] hover:text-[#5FB8C2] transition-colors">Aluplast</span>
+                <span class="text-lg font-medium text-[#CCC] hover:text-[#5FB8C2] transition-colors">Rehau</span>
+                <span class="text-lg font-medium text-[#CCC] hover:text-[#5FB8C2] transition-colors">Leds C4</span>
+                <span class="text-lg font-medium text-[#CCC] hover:text-[#5FB8C2] transition-colors">Leon</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-32 px-6 md:px-12">
+        <div class="max-w-3xl mx-auto text-center reveal">
+            <h2 class="text-5xl md:text-6xl lg:text-7xl font-semibold leading-tight mb-8">
+                Ready for<br><span class="text-[#5FB8C2]">modern living?</span>
+            </h2>
+            <p class="text-[#666] text-lg mb-10 max-w-md mx-auto">
+                European precision. Mediterranean minimalism. Your modern sanctuary awaits.
+            </p>
+            <button class="btn-pool px-10 py-4 rounded-full font-medium text-lg">Start Your Project</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 md:px-12 bg-[#1A1A1A] text-white">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <span class="text-lg font-semibold">tulme</span>
+            <p class="text-sm text-white/50">© 2024 Tulme Studio. Poland → Costa Blanca</p>
+        </div>
+    </footer>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

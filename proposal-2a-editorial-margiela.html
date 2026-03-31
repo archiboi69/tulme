@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TULME STUDIO — Editorial Margiela</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FAFAFA;
+            color: #0A0A0A;
+            font-weight: 400;
+        }
+        .font-serif { font-family: 'Instrument Serif', serif; }
+        
+        /* Margiela-style borders */
+        .border-structure { border: 1px solid #0A0A0A; }
+        .border-b-structure { border-bottom: 1px solid #0A0A0A; }
+        .border-r-structure { border-right: 1px solid #0A0A0A; }
+        .border-l-structure { border-left: 1px solid #0A0A0A; }
+        
+        /* Subtle grain */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Animations */
+        @keyframes fade-up {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up {
+            opacity: 0;
+            animation: fade-up 0.8s var(--ease-out) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+
+        /* Button */
+        .btn-margiela {
+            transition: background 200ms ease, color 200ms ease, transform 160ms var(--ease-out);
+        }
+        .btn-margiela:hover {
+            background: #0A0A0A;
+            color: #FAFAFA;
+        }
+        .btn-margiela:active { transform: scale(0.98); }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Meta labels */
+        .meta-label {
+            font-size: 0.65rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: #666;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <div class="max-w-[1600px] mx-auto border-x border-[#0A0A0A]/10 min-h-screen">
+        
+        <!-- Navigation -->
+        <nav class="border-b-structure flex text-xs uppercase tracking-widest">
+            <div class="p-6 border-r-structure flex items-center animate-fade-up">
+                <a href="index.html" class="font-medium">Tulme Studio</a>
+            </div>
+            <div class="hidden md:flex flex-1 divide-x divide-[#0A0A0A]">
+                <a href="#about" class="p-6 flex-1 text-center hover:bg-[#0A0A0A] hover:text-white transition-colors animate-fade-up delay-1">About</a>
+                <a href="#services" class="p-6 flex-1 text-center hover:bg-[#0A0A0A] hover:text-white transition-colors animate-fade-up delay-2">Services</a>
+                <a href="#process" class="p-6 flex-1 text-center hover:bg-[#0A0A0A] hover:text-white transition-colors animate-fade-up delay-3">Process</a>
+            </div>
+            <a href="#contact" class="p-6 bg-[#0A0A0A] text-white hover:bg-white hover:text-[#0A0A0A] border-l-structure transition-colors animate-fade-up delay-4">
+                Inquire
+            </a>
+        </nav>
+
+        <!-- Hero -->
+        <header class="border-b-structure">
+            <div class="grid lg:grid-cols-3">
+                <!-- Main Title -->
+                <div class="lg:col-span-2 p-8 md:p-16 border-b lg:border-b-0 lg:border-r-structure">
+                    <p class="meta-label mb-8 animate-fade-up">Interior Design & Strategic Sourcing</p>
+                    <h1 class="font-serif text-[15vw] lg:text-[8vw] leading-[0.85] tracking-tight animate-fade-up delay-1">
+                        WHO IS<br>TULME STUDIO?
+                    </h1>
+                    <p class="text-lg md:text-xl max-w-xl mt-8 leading-relaxed text-[#444] animate-fade-up delay-2">
+                        More than interior design. We are your strategic sourcing partners, bridging premium European manufacturing with your property in Spain.
+                    </p>
+                </div>
+
+                <!-- Meta Data Grid -->
+                <div class="divide-y divide-[#0A0A0A] text-sm">
+                    <div class="p-6 flex justify-between animate-fade-up delay-2">
+                        <span class="meta-label">Head Office:</span>
+                        <span class="text-right font-medium">POLAND</span>
+                    </div>
+                    <div class="p-6 flex justify-between animate-fade-up delay-3">
+                        <span class="meta-label">Operations:</span>
+                        <span class="text-right font-medium">COSTA BLANCA,<br>SPAIN</span>
+                    </div>
+                    <div class="p-6 flex justify-between animate-fade-up delay-4">
+                        <span class="meta-label">Founders:</span>
+                        <span class="text-right font-medium">TULME STUDIO<br>EST. 2024</span>
+                    </div>
+                    <div class="p-6 bg-[#F0F0F0] flex justify-between items-center animate-fade-up delay-5">
+                        <span class="meta-label">Status:</span>
+                        <div class="flex items-center gap-2">
+                            <span class="w-2 h-2 bg-[#0A0A0A] rounded-full animate-pulse"></span>
+                            <span class="font-medium">Accepting Projects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Image -->
+            <div class="aspect-[21/9] bg-[#E8E8E8] overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80" 
+                     alt="Interior design" 
+                     class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700">
+            </div>
+        </header>
+
+        <!-- The Studio Section -->
+        <section id="about" class="border-b-structure">
+            <div class="grid lg:grid-cols-2">
+                <!-- Image -->
+                <div class="aspect-square lg:aspect-auto bg-[#E8E8E8] border-b lg:border-b-0 lg:border-r-structure overflow-hidden reveal">
+                    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&q=80" 
+                         alt="Craftsmanship" 
+                         class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Content -->
+                <div class="p-8 md:p-16 flex flex-col justify-center reveal">
+                    <p class="meta-label mb-4">The Studio</p>
+                    <h2 class="font-serif text-5xl md:text-6xl leading-[0.9] mb-8">THE<br>MANIFESTO</h2>
+                    <p class="text-[#444] leading-relaxed mb-6">
+                        Poland is one of the world's leading exporters of high-quality furniture and construction materials. Our industry combines generations of craftsmanship with the most advanced manufacturing technologies.
+                    </p>
+                    <p class="text-[#444] leading-relaxed mb-8">
+                        For discerning clients in Spain, this means access to an unrivaled price-to-quality ratio. This isn't about cutting corners—it's about intelligent sourcing.
+                    </p>
+                    <div class="flex items-center gap-4">
+                        <span class="font-serif text-4xl italic text-[#999]">"</span>
+                        <p class="text-sm uppercase tracking-wider">European precision meets Mediterranean living</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Grid -->
+        <section id="services" class="border-b-structure">
+            <div class="p-8 md:p-16 border-b-structure reveal">
+                <p class="meta-label mb-4">What We Do</p>
+                <h2 class="font-serif text-5xl md:text-6xl">SERVICES</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[#0A0A0A]">
+                <div class="p-8 md:p-12 reveal">
+                    <span class="font-serif text-6xl text-[#DDD]">01</span>
+                    <h3 class="font-serif text-2xl mt-4 mb-4">Bespoke Carpentry & Millwork</h3>
+                    <p class="text-sm text-[#666] leading-relaxed">
+                        Custom kitchens, wardrobes, and built-in furniture crafted by masters of detail. Quality that competes with top-tier Italian brands.
+                    </p>
+                </div>
+                <div class="p-8 md:p-12 reveal">
+                    <span class="font-serif text-6xl text-[#DDD]">02</span>
+                    <h3 class="font-serif text-2xl mt-4 mb-4">World-Class Window Systems</h3>
+                    <p class="text-sm text-[#666] leading-relaxed">
+                        High-performance windows including passive house standards, offering superior insulation crucial for the Spanish climate.
+                    </p>
+                </div>
+            </div>
+            <div class="grid md:grid-cols-2 divide-y md:divide-y-0 md:divide-x divide-[#0A0A0A] border-t-structure">
+                <div class="p-8 md:p-12 reveal">
+                    <span class="font-serif text-6xl text-[#DDD]">03</span>
+                    <h3 class="font-serif text-2xl mt-4 mb-4">Premium Upholstery & Furniture</h3>
+                    <p class="text-sm text-[#666] leading-relaxed">
+                        Access to world-class sofas, beds, and seating. High-end fabrics and ergonomic designs ensuring maximum comfort and durability.
+                    </p>
+                </div>
+                <div class="p-8 md:p-12 reveal">
+                    <span class="font-serif text-6xl text-[#DDD]">04</span>
+                    <h3 class="font-serif text-2xl mt-4 mb-4">End-to-End Logistics</h3>
+                    <p class="text-sm text-[#666] leading-relaxed">
+                        From factory to Costa Blanca. Sourcing, quality control, secure transport, and on-site delivery to your construction site.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process -->
+        <section id="process" class="border-b-structure">
+            <div class="grid lg:grid-cols-4 divide-y lg:divide-y-0 lg:divide-x divide-[#0A0A0A]">
+                <div class="p-8 md:p-12 text-center reveal">
+                    <span class="meta-label block mb-4">Step 01</span>
+                    <h3 class="font-serif text-xl mb-2">Sourcing</h3>
+                    <p class="text-xs text-[#666]">Direct factory access, best prices</p>
+                </div>
+                <div class="p-8 md:p-12 text-center reveal">
+                    <span class="meta-label block mb-4">Step 02</span>
+                    <h3 class="font-serif text-xl mb-2">Quality Control</h3>
+                    <p class="text-xs text-[#666]">Personal verification</p>
+                </div>
+                <div class="p-8 md:p-12 text-center reveal">
+                    <span class="meta-label block mb-4">Step 03</span>
+                    <h3 class="font-serif text-xl mb-2">Logistics</h3>
+                    <p class="text-xs text-[#666]">Coordinated transport</p>
+                </div>
+                <div class="p-8 md:p-12 text-center reveal">
+                    <span class="meta-label block mb-4">Step 04</span>
+                    <h3 class="font-serif text-xl mb-2">Delivery</h3>
+                    <p class="text-xs text-[#666]">Direct to your site</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Partners -->
+        <section class="border-b-structure p-8 md:p-16 reveal">
+            <p class="meta-label text-center mb-8">Our Network of Elite Partners</p>
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16">
+                <span class="font-serif text-xl text-[#999] hover:text-[#0A0A0A] transition-colors cursor-default">Grohe</span>
+                <span class="font-serif text-xl text-[#999] hover:text-[#0A0A0A] transition-colors cursor-default">Ronal</span>
+                <span class="font-serif text-xl text-[#999] hover:text-[#0A0A0A] transition-colors cursor-default">Aluplast</span>
+                <span class="font-serif text-xl text-[#999] hover:text-[#0A0A0A] transition-colors cursor-default">Rehau</span>
+                <span class="font-serif text-xl text-[#999] hover:text-[#0A0A0A] transition-colors cursor-default">Leds C4</span>
+                <span class="font-serif text-xl text-[#999] hover:text-[#0A0A0A] transition-colors cursor-default">Leon</span>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section id="contact" class="p-8 md:p-16 text-center reveal">
+            <p class="meta-label mb-4">Ready to Begin?</p>
+            <h2 class="font-serif text-5xl md:text-7xl mb-8">START YOUR<br>PROJECT</h2>
+            <p class="text-[#666] max-w-md mx-auto mb-8">
+                European design precision and a bulletproof supply chain. Let's discuss your vision.
+            </p>
+            <button class="btn-margiela border-structure px-12 py-4 text-sm uppercase tracking-widest">
+                Inquire Now
+            </button>
+        </section>
+
+        <!-- Footer -->
+        <footer class="border-t-structure p-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs">
+            <span>© 2024 Tulme Studio</span>
+            <span class="text-[#666]">Poland → Costa Blanca</span>
+        </footer>
+    </div>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

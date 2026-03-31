@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TULME STUDIO — Editorial Noise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+            --warm: #E8A555;
+            --charcoal: #1A1A1A;
+            --cream: #FAF9F6;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Sora', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+
+        /* Animations */
+        @keyframes fade-up {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up {
+            opacity: 0;
+            animation: fade-up 0.8s var(--ease-out) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+
+        /* Button */
+        .btn-noise {
+            background: var(--charcoal);
+            color: white;
+            transition: transform 160ms var(--ease-out), box-shadow 300ms ease;
+        }
+        .btn-noise:hover {
+            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+        }
+        .btn-noise:active { transform: scale(0.98); }
+
+        /* Labels */
+        .label-bracket {
+            font-size: 0.7rem;
+            letter-spacing: 0.05em;
+            color: #666;
+        }
+        .label-bracket::before { content: '('; }
+        .label-bracket::after { content: ')'; }
+
+        /* Cards */
+        .card-noise {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+            transition: transform 400ms var(--ease-out), box-shadow 400ms ease;
+        }
+        .card-noise:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Hero image */
+        .hero-image {
+            border-radius: 16px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center bg-white/90 backdrop-blur-md rounded-full px-6 py-3 shadow-sm">
+            <a href="index.html" class="font-semibold text-lg animate-fade-up">Tulme</a>
+            <div class="hidden md:flex items-center gap-8 text-sm">
+                <a href="#about" class="hover:text-[#E8A555] transition-colors animate-fade-up delay-1">About</a>
+                <a href="#services" class="hover:text-[#E8A555] transition-colors animate-fade-up delay-2">Services</a>
+                <a href="#process" class="hover:text-[#E8A555] transition-colors animate-fade-up delay-3">Process</a>
+                <button class="btn-noise px-6 py-2.5 rounded-full text-sm animate-fade-up delay-4">Start Project</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="pt-32 pb-20 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- Left: Title -->
+                <div>
+                    <h1 class="text-5xl md:text-7xl font-semibold leading-[1.05] tracking-tight mb-6 animate-fade-up">
+                        Design.<br>Source.<br>Deliver.
+                    </h1>
+                    <p class="text-lg text-[#666] max-w-md leading-relaxed animate-fade-up delay-1">
+                        A cutting-edge design and sourcing studio bringing European precision to the Costa Blanca, Spain.
+                    </p>
+                </div>
+
+                <!-- Right: Meta Grid -->
+                <div class="grid grid-cols-2 gap-4 text-sm animate-fade-up delay-2">
+                    <div>
+                        <span class="label-bracket">Client</span>
+                        <p class="font-medium mt-1">High-Net-Worth Expats</p>
+                    </div>
+                    <div>
+                        <span class="label-bracket">Origin</span>
+                        <p class="font-medium mt-1">Poland</p>
+                    </div>
+                    <div>
+                        <span class="label-bracket">Destination</span>
+                        <p class="font-medium mt-1">Costa Blanca, ES</p>
+                    </div>
+                    <div>
+                        <span class="label-bracket">Services</span>
+                        <span class="inline-block bg-[#1A1A1A] text-white text-xs px-3 py-1 rounded-full mt-1">Full Service</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Image -->
+            <div class="hero-image mt-12 aspect-[16/9] bg-[#E8A555] relative animate-fade-up delay-3">
+                <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=1400&q=80" 
+                     alt="Interior" 
+                     class="w-full h-full object-cover">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section with Challenge/Goal/Result -->
+    <section id="about" class="py-20 px-6 md:px-12 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex items-start gap-4 mb-12 reveal">
+                <span class="label-bracket">Details</span>
+                <span class="text-2xl">↘</span>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-12">
+                <div class="reveal">
+                    <span class="label-bracket text-[#E8A555]">Challenge</span>
+                    <h3 class="text-xl font-semibold mt-2 mb-4">The "Mañana" Problem</h3>
+                    <p class="text-sm text-[#666] leading-relaxed">
+                        Expats purchasing premium properties in Spain face endless delays, inconsistent quality, and frustrating communication with local contractors. The infamous "mañana" culture makes project timelines unpredictable.
+                    </p>
+                </div>
+                <div class="reveal">
+                    <span class="label-bracket text-[#E8A555]">Goal</span>
+                    <h3 class="text-xl font-semibold mt-2 mb-4">European Standards, Mediterranean Living</h3>
+                    <p class="text-sm text-[#666] leading-relaxed">
+                        Create a seamless bridge between premium Polish manufacturing and Spanish property owners. Deliver high-end materials with Northern European precision and reliability.
+                    </p>
+                </div>
+                <div class="reveal">
+                    <span class="label-bracket text-[#E8A555]">Result</span>
+                    <h3 class="text-xl font-semibold mt-2 mb-4">Bulletproof Supply Chain</h3>
+                    <p class="text-sm text-[#666] leading-relaxed">
+                        A fully integrated sourcing, quality control, and logistics operation that delivers premium materials directly to your Costa Blanca property—on time, every time.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-20 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-12 reveal">
+                <span class="label-bracket">Services</span>
+                <h2 class="text-4xl md:text-5xl font-semibold mt-2">What We Deliver</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card-noise p-8 reveal">
+                    <span class="text-4xl font-light text-[#E8A555]">01</span>
+                    <h3 class="text-xl font-semibold mt-4 mb-3">Bespoke Carpentry</h3>
+                    <p class="text-sm text-[#666] leading-relaxed">
+                        Custom kitchens, wardrobes, and built-in furniture crafted by masters of detail. Quality rivaling top Italian brands.
+                    </p>
+                </div>
+                <div class="card-noise p-8 reveal">
+                    <span class="text-4xl font-light text-[#E8A555]">02</span>
+                    <h3 class="text-xl font-semibold mt-4 mb-3">Window Systems</h3>
+                    <p class="text-sm text-[#666] leading-relaxed">
+                        High-performance windows including passive house standards. Superior insulation crucial for Spanish climate.
+                    </p>
+                </div>
+                <div class="card-noise p-8 reveal">
+                    <span class="text-4xl font-light text-[#E8A555]">03</span>
+                    <h3 class="text-xl font-semibold mt-4 mb-3">Premium Upholstery</h3>
+                    <p class="text-sm text-[#666] leading-relaxed">
+                        World-class sofas, beds, and seating. High-end fabrics and ergonomic designs built for durability.
+                    </p>
+                </div>
+                <div class="card-noise p-8 reveal">
+                    <span class="text-4xl font-light text-[#E8A555]">04</span>
+                    <h3 class="text-xl font-semibold mt-4 mb-3">Full Logistics</h3>
+                    <p class="text-sm text-[#666] leading-relaxed">
+                        End-to-end from Polish factories to Costa Blanca. Quality control, secure transport, on-site delivery.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process" class="py-20 px-6 md:px-12 bg-[#1A1A1A] text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-12 reveal">
+                <span class="label-bracket text-[#E8A555]">Process</span>
+                <h2 class="text-4xl md:text-5xl font-semibold mt-2">How We Work</h2>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="reveal">
+                    <div class="w-12 h-12 rounded-full border-2 border-[#E8A555] flex items-center justify-center mb-4">
+                        <span class="font-semibold">1</span>
+                    </div>
+                    <h3 class="font-semibold mb-2">Sourcing</h3>
+                    <p class="text-sm text-white/60">Direct factory access, optimal pricing, no middlemen.</p>
+                </div>
+                <div class="reveal">
+                    <div class="w-12 h-12 rounded-full border-2 border-[#E8A555] flex items-center justify-center mb-4">
+                        <span class="font-semibold">2</span>
+                    </div>
+                    <h3 class="font-semibold mb-2">Quality Control</h3>
+                    <p class="text-sm text-white/60">Personal verification before departure.</p>
+                </div>
+                <div class="reveal">
+                    <div class="w-12 h-12 rounded-full border-2 border-[#E8A555] flex items-center justify-center mb-4">
+                        <span class="font-semibold">3</span>
+                    </div>
+                    <h3 class="font-semibold mb-2">Transport</h3>
+                    <p class="text-sm text-white/60">Secure, coordinated logistics.</p>
+                </div>
+                <div class="reveal">
+                    <div class="w-12 h-12 rounded-full border-2 border-[#E8A555] flex items-center justify-center mb-4">
+                        <span class="font-semibold">4</span>
+                    </div>
+                    <h3 class="font-semibold mb-2">Delivery</h3>
+                    <p class="text-sm text-white/60">Direct to your Spanish property.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="py-16 px-6 md:px-12 border-y border-[#1A1A1A]/10">
+        <div class="max-w-7xl mx-auto">
+            <p class="label-bracket text-center mb-8 reveal">Elite Partner Network</p>
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16">
+                <span class="text-xl font-medium text-[#999] hover:text-[#1A1A1A] transition-colors">Grohe</span>
+                <span class="text-xl font-medium text-[#999] hover:text-[#1A1A1A] transition-colors">Ronal</span>
+                <span class="text-xl font-medium text-[#999] hover:text-[#1A1A1A] transition-colors">Aluplast</span>
+                <span class="text-xl font-medium text-[#999] hover:text-[#1A1A1A] transition-colors">Rehau</span>
+                <span class="text-xl font-medium text-[#999] hover:text-[#1A1A1A] transition-colors">Leds C4</span>
+                <span class="text-xl font-medium text-[#999] hover:text-[#1A1A1A] transition-colors">Leon</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-24 px-6 md:px-12">
+        <div class="max-w-3xl mx-auto text-center reveal">
+            <span class="label-bracket">Project Gallery</span>
+            <h2 class="text-4xl md:text-6xl font-semibold mt-4 mb-6">Ready to Start?</h2>
+            <p class="text-[#666] mb-10 max-w-md mx-auto">
+                European design precision. Bulletproof supply chain. Your vision, delivered.
+            </p>
+            <button class="btn-noise px-10 py-4 rounded-full text-sm font-medium">
+                Begin Your Project
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 md:px-12 bg-[#1A1A1A] text-white">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div>
+                <span class="font-semibold text-lg">Tulme Studio</span>
+                <p class="text-sm text-white/50 mt-1">Poland → Costa Blanca</p>
+            </div>
+            <p class="text-sm text-white/50">© 2024 Tulme Studio. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

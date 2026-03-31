@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TULME STUDIO — Coastal Luxury</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Work+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+            --sand: #F5EFE6;
+            --ocean: #2E5A6B;
+            --sky: #87CEEB;
+            --white: #FFFFFF;
+            --charcoal: #2C3E50;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Work Sans', sans-serif;
+            background: var(--sand);
+            color: var(--charcoal);
+            font-weight: 400;
+        }
+        .font-display { font-family: 'Crimson Pro', serif; }
+
+        /* Animations */
+        @keyframes fade-up {
+            0% { opacity: 0; transform: translateY(30px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes wave {
+            0%, 100% { transform: translateX(0); }
+            50% { transform: translateX(-10px); }
+        }
+        .animate-fade-up {
+            opacity: 0;
+            animation: fade-up 0.8s var(--ease-out) forwards;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+
+        /* Button */
+        .btn-coastal {
+            background: var(--ocean);
+            color: white;
+            transition: background 300ms ease, transform 160ms var(--ease-out), box-shadow 300ms ease;
+        }
+        .btn-coastal:hover {
+            background: #1D4A5A;
+            box-shadow: 0 8px 30px rgba(46, 90, 107, 0.3);
+        }
+        .btn-coastal:active { transform: scale(0.98); }
+
+        .btn-outline {
+            border: 1.5px solid var(--ocean);
+            color: var(--ocean);
+            transition: all 300ms ease;
+        }
+        .btn-outline:hover {
+            background: var(--ocean);
+            color: white;
+        }
+
+        /* Cards */
+        .card-coastal {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.05);
+            transition: transform 400ms var(--ease-out), box-shadow 400ms ease;
+        }
+        .card-coastal:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 50px rgba(0,0,0,0.1);
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* Image styling */
+        .image-coastal {
+            border-radius: 16px;
+            overflow: hidden;
+        }
+        .image-coastal img {
+            transition: transform 600ms var(--ease-out);
+        }
+        .image-coastal:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Wave decoration */
+        .wave-line {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--ocean), transparent);
+        }
+    </style>
+</head>
+<body class="antialiased">
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center bg-white/90 backdrop-blur-md rounded-full px-6 py-3 shadow-sm">
+            <a href="index.html" class="flex items-center gap-2 animate-fade-up">
+                <span class="w-8 h-8 bg-[#2E5A6B] rounded-full flex items-center justify-center text-white text-sm font-medium">T</span>
+                <span class="font-display text-xl">Tulme</span>
+            </a>
+            <div class="hidden md:flex items-center gap-8 text-sm">
+                <a href="#about" class="hover:text-[#2E5A6B] transition-colors animate-fade-up delay-1">About</a>
+                <a href="#services" class="hover:text-[#2E5A6B] transition-colors animate-fade-up delay-2">Services</a>
+                <a href="#process" class="hover:text-[#2E5A6B] transition-colors animate-fade-up delay-3">Process</a>
+                <button class="btn-coastal px-6 py-2.5 rounded-full text-sm font-medium animate-fade-up delay-4">Contact</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="min-h-screen pt-28 pb-16 px-6 md:px-12 flex items-center">
+        <div class="max-w-7xl mx-auto w-full">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <!-- Content -->
+                <div>
+                    <div class="inline-flex items-center gap-3 bg-white rounded-full px-5 py-2 shadow-sm mb-8 animate-fade-up">
+                        <span class="w-2 h-2 rounded-full bg-[#2E5A6B]"></span>
+                        <span class="text-sm font-medium text-[#2E5A6B]">Poland → Costa Blanca</span>
+                    </div>
+
+                    <h1 class="font-display text-5xl md:text-6xl lg:text-7xl leading-[1.05] mb-8 animate-fade-up delay-1">
+                        Where European<br>
+                        <span class="text-[#2E5A6B]">Precision</span><br>
+                        Meets the Sea
+                    </h1>
+
+                    <p class="text-lg text-[#5D6B7A] max-w-md mb-10 leading-relaxed animate-fade-up delay-2">
+                        More than interior design. We bridge premium European manufacturing with your Mediterranean sanctuary. No more delays—just excellence.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 animate-fade-up delay-3">
+                        <button class="btn-coastal px-8 py-4 rounded-full font-medium">Begin Your Journey</button>
+                        <button class="btn-outline px-8 py-4 rounded-full font-medium">Learn More</button>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="relative animate-fade-up delay-2">
+                    <div class="image-coastal aspect-[4/5]">
+                        <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&q=80" 
+                             alt="Coastal villa" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- Floating badge -->
+                    <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl max-w-[200px]">
+                        <div class="flex items-center gap-2 mb-2">
+                            <svg class="w-5 h-5 text-[#2E5A6B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="font-medium">No Mañana</span>
+                        </div>
+                        <p class="text-sm text-[#5D6B7A]">European precision, always on time</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About -->
+    <section id="about" class="py-24 px-6 md:px-12 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div class="grid grid-cols-2 gap-4 reveal">
+                    <div class="image-coastal aspect-[3/4]">
+                        <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=500&q=80" alt="Craftsmanship" class="w-full h-full object-cover">
+                    </div>
+                    <div class="image-coastal aspect-square self-end">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=500&q=80" alt="Interior" class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <div class="reveal">
+                    <p class="text-sm tracking-wider uppercase text-[#2E5A6B] mb-4">Our Story</p>
+                    <h2 class="font-display text-4xl md:text-5xl leading-tight mb-6">
+                        Bridging continents with craftsmanship
+                    </h2>
+                    <p class="text-[#5D6B7A] leading-relaxed mb-6">
+                        Poland is one of the world's leading exporters of high-quality furniture and construction materials. Generations of craftsmanship meet advanced manufacturing technologies.
+                    </p>
+                    <p class="text-[#5D6B7A] leading-relaxed">
+                        For discerning clients in Spain, this means unrivaled price-to-quality. This isn't cutting corners—it's intelligent sourcing.
+                    </p>
+
+                    <div class="wave-line my-8"></div>
+
+                    <div class="flex items-center gap-6">
+                        <div class="w-14 h-14 bg-[#2E5A6B] rounded-full flex items-center justify-center">
+                            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-medium">Bulletproof Supply Chain</p>
+                            <p class="text-sm text-[#5D6B7A]">Factory to your door, seamlessly</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services -->
+    <section id="services" class="py-24 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <p class="text-sm tracking-wider uppercase text-[#2E5A6B] mb-4">What We Offer</p>
+                <h2 class="font-display text-4xl md:text-5xl">Premium Services</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card-coastal p-8 reveal">
+                    <div class="w-12 h-12 bg-[#F5EFE6] rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-[#2E5A6B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.5"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9" stroke-width="1.5"></line>
+                            <line x1="9" y1="21" x2="9" y2="9" stroke-width="1.5"></line>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl mb-3">Bespoke Carpentry</h3>
+                    <p class="text-sm text-[#5D6B7A]">Custom kitchens, wardrobes, built-in furniture. Quality rivaling Italian brands.</p>
+                </div>
+
+                <div class="card-coastal p-8 reveal">
+                    <div class="w-12 h-12 bg-[#F5EFE6] rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-[#2E5A6B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <rect x="3" y="3" width="18" height="18" rx="2" stroke-width="1.5"></rect>
+                            <line x1="9" y1="3" x2="9" y2="21" stroke-width="1.5"></line>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl mb-3">Window Systems</h3>
+                    <p class="text-sm text-[#5D6B7A]">High-performance including passive house standards for Spanish climate.</p>
+                </div>
+
+                <div class="card-coastal p-8 reveal">
+                    <div class="w-12 h-12 bg-[#F5EFE6] rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-[#2E5A6B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" stroke-width="1.5"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl mb-3">Premium Upholstery</h3>
+                    <p class="text-sm text-[#5D6B7A]">World-class sofas, beds. High-end fabrics, ergonomic designs.</p>
+                </div>
+
+                <div class="card-coastal p-8 reveal">
+                    <div class="w-12 h-12 bg-[#F5EFE6] rounded-xl flex items-center justify-center mb-6">
+                        <svg class="w-6 h-6 text-[#2E5A6B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="12" r="10" stroke-width="1.5"></circle>
+                            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76" stroke-width="1.5"></polygon>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl mb-3">Full Logistics</h3>
+                    <p class="text-sm text-[#5D6B7A]">End-to-end from Polish factories to Costa Blanca delivery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process" class="py-24 px-6 md:px-12 bg-[#2E5A6B] text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <p class="text-sm tracking-wider uppercase text-white/60 mb-4">Our Process</p>
+                <h2 class="font-display text-4xl md:text-5xl">From Vision to Reality</h2>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center reveal">
+                    <div class="w-20 h-20 mx-auto border-2 border-white/30 rounded-full flex items-center justify-center mb-6">
+                        <span class="font-display text-2xl">1</span>
+                    </div>
+                    <h3 class="font-display text-lg mb-2">Sourcing</h3>
+                    <p class="text-sm text-white/60">Direct factory access, best prices</p>
+                </div>
+                <div class="text-center reveal">
+                    <div class="w-20 h-20 mx-auto border-2 border-white/30 rounded-full flex items-center justify-center mb-6">
+                        <span class="font-display text-2xl">2</span>
+                    </div>
+                    <h3 class="font-display text-lg mb-2">Quality Check</h3>
+                    <p class="text-sm text-white/60">Personal verification</p>
+                </div>
+                <div class="text-center reveal">
+                    <div class="w-20 h-20 mx-auto border-2 border-white/30 rounded-full flex items-center justify-center mb-6">
+                        <span class="font-display text-2xl">3</span>
+                    </div>
+                    <h3 class="font-display text-lg mb-2">Transport</h3>
+                    <p class="text-sm text-white/60">Secure, coordinated logistics</p>
+                </div>
+                <div class="text-center reveal">
+                    <div class="w-20 h-20 mx-auto border-2 border-white/30 rounded-full flex items-center justify-center mb-6">
+                        <span class="font-display text-2xl">4</span>
+                    </div>
+                    <h3 class="font-display text-lg mb-2">Delivery</h3>
+                    <p class="text-sm text-white/60">Direct to your Spanish property</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners -->
+    <section class="py-16 px-6 md:px-12 bg-white">
+        <div class="max-w-7xl mx-auto text-center reveal">
+            <p class="text-sm tracking-wider uppercase text-[#2E5A6B] mb-8">Our Network</p>
+            <div class="flex flex-wrap justify-center gap-8 md:gap-16">
+                <span class="font-display text-xl text-[#AAA] hover:text-[#2E5A6B] transition-colors">Grohe</span>
+                <span class="font-display text-xl text-[#AAA] hover:text-[#2E5A6B] transition-colors">Ronal</span>
+                <span class="font-display text-xl text-[#AAA] hover:text-[#2E5A6B] transition-colors">Aluplast</span>
+                <span class="font-display text-xl text-[#AAA] hover:text-[#2E5A6B] transition-colors">Rehau</span>
+                <span class="font-display text-xl text-[#AAA] hover:text-[#2E5A6B] transition-colors">Leds C4</span>
+                <span class="font-display text-xl text-[#AAA] hover:text-[#2E5A6B] transition-colors">Leon</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-24 px-6 md:px-12">
+        <div class="max-w-3xl mx-auto text-center reveal">
+            <p class="text-sm tracking-wider uppercase text-[#2E5A6B] mb-4">Ready to Begin?</p>
+            <h2 class="font-display text-4xl md:text-5xl lg:text-6xl mb-6">
+                Let's create your<br>coastal dream
+            </h2>
+            <p class="text-[#5D6B7A] mb-10 max-w-md mx-auto">
+                European design precision. Bulletproof supply chain. Your Mediterranean sanctuary awaits.
+            </p>
+            <button class="btn-coastal px-10 py-4 rounded-full font-medium">Start Your Project</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 md:px-12 bg-[#2E5A6B] text-white">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="flex items-center gap-3">
+                <span class="w-8 h-8 bg-white/20 rounded-full flex items-center justify-center text-sm font-medium">T</span>
+                <span class="font-display text-lg">Tulme Studio</span>
+            </div>
+            <p class="text-sm text-white/60">© 2024 Tulme Studio. Poland → Costa Blanca</p>
+        </div>
+    </footer>
+
+    <script>
+        const reveals = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+</body>
+</html>

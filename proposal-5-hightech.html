@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TULME STUDIO — High-Tech Precision</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+            --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+            --steel: #1A2634;
+            --titanium: #2A3A4D;
+            --chrome: #4A6880;
+            --ice: #E8F1F8;
+            --cyan: #00D4FF;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--steel);
+            color: var(--ice);
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Grid overlay */
+        .grid-bg {
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+        }
+
+        /* Blueprint lines */
+        .blueprint-lines {
+            background-image: 
+                linear-gradient(rgba(0, 212, 255, 0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 212, 255, 0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+
+        /* Animations */
+        @keyframes scan-line {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+
+        @keyframes fade-in-up {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes data-flow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(0, 212, 255, 0.6); }
+        }
+
+        @keyframes draw-line {
+            0% { stroke-dashoffset: 1000; }
+            100% { stroke-dashoffset: 0; }
+        }
+
+        @keyframes type-cursor {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .animate-fade-up {
+            opacity: 0;
+            animation: fade-in-up 0.8s var(--ease-out) forwards;
+        }
+
+        .animate-pulse-glow {
+            animation: pulse-glow 3s ease-in-out infinite;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+        .delay-8 { animation-delay: 0.8s; }
+
+        /* Typing cursor */
+        .typing-cursor::after {
+            content: '|';
+            animation: type-cursor 1s infinite;
+            color: var(--cyan);
+        }
+
+        /* Button styling */
+        .btn-tech {
+            background: transparent;
+            border: 1px solid var(--cyan);
+            color: var(--cyan);
+            position: relative;
+            overflow: hidden;
+            transition: color 300ms ease, transform 160ms var(--ease-out);
+        }
+        .btn-tech::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--cyan);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 400ms var(--ease-out);
+        }
+        .btn-tech:hover::before {
+            transform: scaleX(1);
+        }
+        .btn-tech:hover {
+            color: var(--steel);
+        }
+        .btn-tech:active {
+            transform: scale(0.98);
+        }
+        .btn-tech span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-primary {
+            background: var(--cyan);
+            color: var(--steel);
+            transition: background 300ms ease, transform 160ms var(--ease-out), box-shadow 300ms ease;
+        }
+        .btn-primary:hover {
+            background: #33DDFF;
+            box-shadow: 0 0 30px rgba(0, 212, 255, 0.4);
+        }
+        .btn-primary:active {
+            transform: scale(0.98);
+        }
+
+        /* Card styling */
+        .card-tech {
+            background: linear-gradient(135deg, rgba(42, 58, 77, 0.5) 0%, rgba(26, 38, 52, 0.8) 100%);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            backdrop-filter: blur(10px);
+            transition: border-color 300ms ease, transform 400ms var(--ease-out);
+        }
+        .card-tech:hover {
+            border-color: rgba(0, 212, 255, 0.4);
+            transform: translateY(-4px);
+        }
+
+        /* Data display */
+        .data-label {
+            color: var(--chrome);
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            background: rgba(0, 212, 255, 0.1);
+            height: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: var(--progress, 0%);
+            background: var(--cyan);
+            transition: width 1s var(--ease-out);
+        }
+
+        /* Scan line effect */
+        .scan-line {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, transparent, var(--cyan), transparent);
+            opacity: 0.3;
+            animation: scan-line 8s linear infinite;
+        }
+
+        /* Corner decorations */
+        .corner-bracket {
+            position: relative;
+        }
+        .corner-bracket::before,
+        .corner-bracket::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            border-color: var(--cyan);
+            border-style: solid;
+        }
+        .corner-bracket::before {
+            top: -1px;
+            left: -1px;
+            border-width: 2px 0 0 2px;
+        }
+        .corner-bracket::after {
+            bottom: -1px;
+            right: -1px;
+            border-width: 0 2px 2px 0;
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Process connector */
+        .process-connector {
+            position: relative;
+        }
+        .process-connector::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 100%;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(to right, var(--cyan) 50%, transparent);
+            transform: translateY(-50%);
+        }
+
+        /* Status indicator */
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--cyan);
+            animation: pulse-glow 2s infinite;
+        }
+    </style>
+</head>
+<body class="grid-bg">
+    <!-- Scan line effect -->
+    <div class="scan-line"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-4 bg-[#1A2634]/90 backdrop-blur-md border-b border-[#00D4FF]/10">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-4 animate-fade-up">
+                <div class="w-10 h-10 border border-[#00D4FF] flex items-center justify-center font-mono font-semibold text-[#00D4FF]">
+                    T.
+                </div>
+                <div class="hidden sm:block">
+                    <span class="font-mono text-sm text-[#00D4FF]">TULME</span>
+                    <span class="text-xs text-[#4A6880] ml-2">STUDIO.v1</span>
+                </div>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#specs" class="font-mono text-xs tracking-wider text-[#4A6880] hover:text-[#00D4FF] transition-colors animate-fade-up delay-1">
+                    [SPECS]
+                </a>
+                <a href="#process" class="font-mono text-xs tracking-wider text-[#4A6880] hover:text-[#00D4FF] transition-colors animate-fade-up delay-2">
+                    [PROCESS]
+                </a>
+                <a href="#network" class="font-mono text-xs tracking-wider text-[#4A6880] hover:text-[#00D4FF] transition-colors animate-fade-up delay-3">
+                    [NETWORK]
+                </a>
+                <button class="btn-tech px-5 py-2 font-mono text-xs tracking-wider animate-fade-up delay-4">
+                    <span>INITIALIZE</span>
+                </button>
+            </div>
+
+            <!-- Status indicator -->
+            <div class="flex items-center gap-2 md:hidden">
+                <div class="status-dot"></div>
+                <span class="font-mono text-xs text-[#4A6880]">ONLINE</span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-20 px-6 md:px-12 relative overflow-hidden">
+        <!-- Background decorations -->
+        <div class="absolute top-1/4 right-10 w-64 h-64 border border-[#00D4FF]/10 rotate-45 animate-fade-up delay-5"></div>
+        <div class="absolute bottom-1/4 left-10 w-32 h-32 border border-[#00D4FF]/5 animate-fade-up delay-6"></div>
+
+        <div class="max-w-7xl mx-auto w-full">
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <!-- Main content -->
+                <div class="lg:col-span-7">
+                    <!-- System status -->
+                    <div class="flex items-center gap-4 mb-8 animate-fade-up">
+                        <div class="status-dot"></div>
+                        <span class="font-mono text-xs text-[#4A6880] tracking-wider">SYSTEM_ACTIVE // POLAND → COSTA_BLANCA</span>
+                    </div>
+
+                    <h1 class="text-5xl md:text-6xl lg:text-7xl font-semibold leading-[1.05] mb-8 animate-fade-up delay-1">
+                        <span class="text-[#00D4FF]">DESIGN.</span><br>
+                        <span class="text-[#E8F1F8]">SOURCE.</span><br>
+                        <span class="text-[#4A6880]">DELIVER.</span>
+                    </h1>
+
+                    <p class="text-lg text-[#4A6880] max-w-lg mb-10 animate-fade-up delay-2">
+                        Strategic sourcing partners. European design precision meets bulletproof logistics. 
+                        Premium manufacturing → Your Spanish property.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 mb-12 animate-fade-up delay-3">
+                        <button class="btn-primary px-8 py-4 font-mono text-sm tracking-wider">
+                            INIT_PROJECT
+                        </button>
+                        <button class="btn-tech px-8 py-4 font-mono text-sm tracking-wider">
+                            <span>VIEW_SPECS</span>
+                        </button>
+                    </div>
+
+                    <!-- Stats -->
+                    <div class="grid grid-cols-3 gap-8 animate-fade-up delay-4">
+                        <div>
+                            <span class="data-label font-mono">MIDDLEMEN</span>
+                            <p class="font-mono text-2xl text-[#00D4FF] mt-1">0</p>
+                        </div>
+                        <div>
+                            <span class="data-label font-mono">QC_RATE</span>
+                            <p class="font-mono text-2xl text-[#00D4FF] mt-1">100%</p>
+                        </div>
+                        <div>
+                            <span class="data-label font-mono">DELAYS</span>
+                            <p class="font-mono text-2xl text-[#00D4FF] mt-1">NULL</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Side panel -->
+                <div class="lg:col-span-4 lg:col-start-9 space-y-6 animate-fade-up delay-5">
+                    <div class="card-tech corner-bracket p-6">
+                        <span class="data-label font-mono block mb-2">ORIGIN_POINT</span>
+                        <p class="font-semibold text-lg">POLAND</p>
+                        <div class="progress-bar mt-3" style="--progress: 100%"></div>
+                    </div>
+
+                    <div class="card-tech corner-bracket p-6">
+                        <span class="data-label font-mono block mb-2">DESTINATION</span>
+                        <p class="font-semibold text-lg">COSTA BLANCA</p>
+                        <div class="progress-bar mt-3" style="--progress: 100%"></div>
+                    </div>
+
+                    <div class="card-tech corner-bracket p-6">
+                        <span class="data-label font-mono block mb-2">STATUS</span>
+                        <p class="font-semibold text-lg text-[#00D4FF]">OPERATIONAL</p>
+                        <div class="flex items-center gap-2 mt-3">
+                            <div class="status-dot"></div>
+                            <span class="font-mono text-xs text-[#4A6880]">NO_MAÑANA</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 animate-fade-up delay-6">
+            <span class="font-mono text-xs text-[#4A6880] tracking-widest">SCROLL</span>
+            <div class="w-[1px] h-12 bg-gradient-to-b from-[#00D4FF] to-transparent"></div>
+        </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section class="py-20 px-6 md:px-12 border-y border-[#00D4FF]/10 bg-[#1A2634]/50">
+        <div class="max-w-5xl mx-auto reveal">
+            <div class="card-tech p-8 md:p-12">
+                <span class="data-label font-mono block mb-4">// INTELLIGENCE_BRIEF</span>
+                <p class="text-xl md:text-2xl leading-relaxed">
+                    Poland is a <span class="text-[#00D4FF]">global leader</span> in high-quality furniture and construction materials. 
+                    Generations of craftsmanship + advanced manufacturing = 
+                    <span class="text-[#00D4FF]">unrivaled price-to-quality ratio</span>. 
+                    This isn't cutting corners — it's <span class="text-[#00D4FF]">intelligent sourcing</span>.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specs/Services Section -->
+    <section id="specs" class="py-24 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 reveal">
+                <span class="data-label font-mono block mb-2">SECTION_02</span>
+                <h2 class="text-4xl md:text-5xl font-semibold">
+                    SERVICE_<span class="text-[#00D4FF]">MODULES</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="card-tech p-8 blueprint-lines reveal">
+                    <div class="flex items-start justify-between mb-6">
+                        <span class="font-mono text-[#00D4FF] text-sm">[MOD_01]</span>
+                        <div class="status-dot"></div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">BESPOKE_CARPENTRY</h3>
+                    <p class="text-[#4A6880] text-sm mb-6">
+                        Custom kitchens, wardrobes, built-in furniture. 
+                        Master craftsmanship. Quality spec: IT_TIER_1.
+                    </p>
+                    <div class="progress-bar" style="--progress: 100%"></div>
+                    <span class="font-mono text-xs text-[#4A6880] mt-2 block">QUALITY_INDEX: MAXIMUM</span>
+                </div>
+
+                <div class="card-tech p-8 blueprint-lines reveal">
+                    <div class="flex items-start justify-between mb-6">
+                        <span class="font-mono text-[#00D4FF] text-sm">[MOD_02]</span>
+                        <div class="status-dot"></div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">WINDOW_SYSTEMS</h3>
+                    <p class="text-[#4A6880] text-sm mb-6">
+                        High-performance including passive house standards. 
+                        Thermal spec: SUPERIOR. Climate: ES_OPTIMIZED.
+                    </p>
+                    <div class="progress-bar" style="--progress: 95%"></div>
+                    <span class="font-mono text-xs text-[#4A6880] mt-2 block">INSULATION_GRADE: A++</span>
+                </div>
+
+                <div class="card-tech p-8 blueprint-lines reveal">
+                    <div class="flex items-start justify-between mb-6">
+                        <span class="font-mono text-[#00D4FF] text-sm">[MOD_03]</span>
+                        <div class="status-dot"></div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">PREMIUM_UPHOLSTERY</h3>
+                    <p class="text-[#4A6880] text-sm mb-6">
+                        World-class sofas, beds, seating. 
+                        Fabric tier: PREMIUM. Durability: HIGH_TRAFFIC_RATED.
+                    </p>
+                    <div class="progress-bar" style="--progress: 100%"></div>
+                    <span class="font-mono text-xs text-[#4A6880] mt-2 block">COMFORT_INDEX: 98/100</span>
+                </div>
+
+                <div class="card-tech p-8 blueprint-lines reveal">
+                    <div class="flex items-start justify-between mb-6">
+                        <span class="font-mono text-[#00D4FF] text-sm">[MOD_04]</span>
+                        <div class="status-dot"></div>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-4">LOGISTICS_PROTOCOL</h3>
+                    <p class="text-[#4A6880] text-sm mb-6">
+                        Factory → Costa Blanca. Full chain management. 
+                        QC: ON_SITE. Transport: SECURE. Delivery: DIRECT.
+                    </p>
+                    <div class="progress-bar" style="--progress: 100%"></div>
+                    <span class="font-mono text-xs text-[#4A6880] mt-2 block">RELIABILITY: BULLETPROOF</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="py-24 px-6 md:px-12 bg-[#1A2634]/50 border-y border-[#00D4FF]/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 reveal">
+                <span class="data-label font-mono block mb-2">SECTION_03</span>
+                <h2 class="text-4xl md:text-5xl font-semibold">
+                    EXECUTION_<span class="text-[#00D4FF]">PROTOCOL</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-4">
+                <div class="reveal">
+                    <div class="card-tech p-6 h-full">
+                        <div class="w-12 h-12 border border-[#00D4FF] flex items-center justify-center mb-6">
+                            <span class="font-mono text-[#00D4FF] font-semibold">01</span>
+                        </div>
+                        <h3 class="font-semibold mb-2">INIT</h3>
+                        <span class="data-label font-mono block mb-3">SOURCING</span>
+                        <p class="text-sm text-[#4A6880]">
+                            Direct factory access. Zero middlemen. Optimal pricing secured.
+                        </p>
+                    </div>
+                    <div class="hidden md:block h-[2px] bg-gradient-to-r from-[#00D4FF] to-transparent mt-4"></div>
+                </div>
+
+                <div class="reveal">
+                    <div class="card-tech p-6 h-full">
+                        <div class="w-12 h-12 border border-[#00D4FF] flex items-center justify-center mb-6">
+                            <span class="font-mono text-[#00D4FF] font-semibold">02</span>
+                        </div>
+                        <h3 class="font-semibold mb-2">VERIFY</h3>
+                        <span class="data-label font-mono block mb-3">QC_CHECK</span>
+                        <p class="text-sm text-[#4A6880]">
+                            Personal verification. Every item inspected before departure.
+                        </p>
+                    </div>
+                    <div class="hidden md:block h-[2px] bg-gradient-to-r from-[#00D4FF] to-transparent mt-4"></div>
+                </div>
+
+                <div class="reveal">
+                    <div class="card-tech p-6 h-full">
+                        <div class="w-12 h-12 border border-[#00D4FF] flex items-center justify-center mb-6">
+                            <span class="font-mono text-[#00D4FF] font-semibold">03</span>
+                        </div>
+                        <h3 class="font-semibold mb-2">TRANSIT</h3>
+                        <span class="data-label font-mono block mb-3">LOGISTICS</span>
+                        <p class="text-sm text-[#4A6880]">
+                            Secure transport coordination. Real-time tracking enabled.
+                        </p>
+                    </div>
+                    <div class="hidden md:block h-[2px] bg-gradient-to-r from-[#00D4FF] to-transparent mt-4"></div>
+                </div>
+
+                <div class="reveal">
+                    <div class="card-tech p-6 h-full">
+                        <div class="w-12 h-12 border border-[#00D4FF] flex items-center justify-center mb-6">
+                            <span class="font-mono text-[#00D4FF] font-semibold">04</span>
+                        </div>
+                        <h3 class="font-semibold mb-2">DEPLOY</h3>
+                        <span class="data-label font-mono block mb-3">DELIVERY</span>
+                        <p class="text-sm text-[#4A6880]">
+                            Direct to site. Costa Blanca or anywhere in Spain. Complete.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Network/Partners Section -->
+    <section id="network" class="py-24 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="mb-16 reveal">
+                <span class="data-label font-mono block mb-2">SECTION_04</span>
+                <h2 class="text-4xl md:text-5xl font-semibold">
+                    PARTNER_<span class="text-[#00D4FF]">NETWORK</span>
+                </h2>
+                <p class="text-[#4A6880] mt-4 max-w-xl">
+                    Direct access to curated European manufacturers. No retail markup. Factory-direct protocols.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 reveal">
+                <div class="card-tech p-6 text-center group">
+                    <span class="font-mono text-lg text-[#4A6880] group-hover:text-[#00D4FF] transition-colors">GROHE</span>
+                </div>
+                <div class="card-tech p-6 text-center group">
+                    <span class="font-mono text-lg text-[#4A6880] group-hover:text-[#00D4FF] transition-colors">RONAL</span>
+                </div>
+                <div class="card-tech p-6 text-center group">
+                    <span class="font-mono text-lg text-[#4A6880] group-hover:text-[#00D4FF] transition-colors">ALUPLAST</span>
+                </div>
+                <div class="card-tech p-6 text-center group">
+                    <span class="font-mono text-lg text-[#4A6880] group-hover:text-[#00D4FF] transition-colors">REHAU</span>
+                </div>
+                <div class="card-tech p-6 text-center group">
+                    <span class="font-mono text-lg text-[#4A6880] group-hover:text-[#00D4FF] transition-colors">LEDS_C4</span>
+                </div>
+                <div class="card-tech p-6 text-center group">
+                    <span class="font-mono text-lg text-[#4A6880] group-hover:text-[#00D4FF] transition-colors">LEON</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 px-6 md:px-12 border-t border-[#00D4FF]/10">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <span class="data-label font-mono block mb-4">// READY_TO_EXECUTE?</span>
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-semibold mb-6">
+                INIT_<span class="text-[#00D4FF] typing-cursor">PROJECT</span>
+            </h2>
+            <p class="text-[#4A6880] text-lg mb-10 max-w-xl mx-auto">
+                European precision. Bulletproof supply chain. Zero delays. 
+                Your vision, executed with technical excellence.
+            </p>
+            <button class="btn-primary px-12 py-5 font-mono text-sm tracking-wider animate-pulse-glow">
+                BEGIN_SEQUENCE →
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 md:px-12 border-t border-[#00D4FF]/10 bg-[#1A2634]/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 border border-[#00D4FF] flex items-center justify-center font-mono font-semibold text-[#00D4FF]">
+                        T.
+                    </div>
+                    <div>
+                        <span class="font-mono text-sm text-[#00D4FF]">TULME.STUDIO</span>
+                        <p class="text-xs text-[#4A6880]">v1.0 // PL → ES</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-6">
+                    <div class="status-dot"></div>
+                    <span class="font-mono text-xs text-[#4A6880]">ALL_SYSTEMS_OPERATIONAL</span>
+                </div>
+
+                <p class="font-mono text-xs text-[#4A6880]">
+                    © 2024 TULME_STUDIO
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '-50px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Animate progress bars on scroll
+        const progressBars = document.querySelectorAll('.progress-bar');
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.setProperty('--progress', entry.target.style.getPropertyValue('--progress'));
+                }
+            });
+        }, { threshold: 0.5 });
+
+        progressBars.forEach(bar => progressObserver.observe(bar));
+    </script>
+</body>
+</html>

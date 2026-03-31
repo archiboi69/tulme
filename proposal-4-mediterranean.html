@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TULME STUDIO — Mediterranean Modern</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+            --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+            --sand: #F5EDE4;
+            --terracotta: #C4785A;
+            --olive: #5D6B4C;
+            --sea: #4A6670;
+            --cream: #FFFBF7;
+            --charcoal: #2D2A26;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Manrope', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        .font-display {
+            font-family: 'Fraunces', serif;
+        }
+
+        /* Warm grain texture */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.02;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Organic shapes */
+        .blob {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+        }
+
+        /* Animations */
+        @keyframes fade-up-gentle {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scale-in {
+            0% {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes float-gentle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes wave {
+            0%, 100% { 
+                border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            }
+            50% { 
+                border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
+            }
+        }
+
+        .animate-fade-up {
+            opacity: 0;
+            animation: fade-up-gentle 0.8s var(--ease-out) forwards;
+        }
+
+        .animate-scale-in {
+            opacity: 0;
+            animation: scale-in 1s var(--ease-out) forwards;
+        }
+
+        .animate-float {
+            animation: float-gentle 4s ease-in-out infinite;
+        }
+
+        .animate-wave {
+            animation: wave 8s ease-in-out infinite;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+        .delay-4 { animation-delay: 0.4s; }
+        .delay-5 { animation-delay: 0.5s; }
+        .delay-6 { animation-delay: 0.6s; }
+        .delay-7 { animation-delay: 0.7s; }
+
+        /* Button styling */
+        .btn-warm {
+            background: var(--terracotta);
+            color: white;
+            transition: background 300ms ease, transform 160ms var(--ease-out), box-shadow 300ms ease;
+        }
+        .btn-warm:hover {
+            background: #B06B4E;
+            box-shadow: 0 8px 30px rgba(196, 120, 90, 0.3);
+        }
+        .btn-warm:active {
+            transform: scale(0.98);
+        }
+
+        .btn-outline {
+            border: 1.5px solid var(--charcoal);
+            background: transparent;
+            transition: background 300ms ease, color 300ms ease, transform 160ms var(--ease-out);
+        }
+        .btn-outline:hover {
+            background: var(--charcoal);
+            color: var(--cream);
+        }
+        .btn-outline:active {
+            transform: scale(0.98);
+        }
+
+        /* Card styling */
+        .card-warm {
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 4px 20px rgba(45, 42, 38, 0.06);
+            transition: transform 400ms var(--ease-out), box-shadow 400ms ease;
+        }
+        .card-warm:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 40px rgba(45, 42, 38, 0.1);
+        }
+
+        /* Image styling */
+        .image-warm {
+            border-radius: 20px;
+            overflow: hidden;
+        }
+        .image-warm img {
+            transition: transform 600ms var(--ease-out);
+        }
+        .image-warm:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Decorative elements */
+        .sun-circle {
+            background: linear-gradient(135deg, var(--terracotta) 0%, #E8A88C 100%);
+            border-radius: 50%;
+        }
+
+        .olive-blob {
+            background: var(--olive);
+            opacity: 0.1;
+        }
+
+        /* Section dividers */
+        .wave-divider {
+            height: 60px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 60'%3E%3Cpath fill='%23F5EDE4' d='M0,30 C360,60 720,0 1080,30 C1260,45 1350,45 1440,30 L1440,60 L0,60 Z'/%3E%3C/svg%3E");
+            background-size: cover;
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Process line */
+        .process-line {
+            background: linear-gradient(to bottom, var(--terracotta), var(--olive));
+        }
+
+        /* Partner items */
+        .partner-item {
+            opacity: 0.5;
+            transition: opacity 400ms ease;
+        }
+        .partner-item:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-6 md:px-12 py-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center bg-white/80 backdrop-blur-md rounded-full px-6 py-3 shadow-sm">
+            <div class="flex items-center gap-3 animate-fade-up">
+                <div class="w-10 h-10 sun-circle flex items-center justify-center">
+                    <span class="text-white font-display font-semibold text-lg">T</span>
+                </div>
+                <span class="font-display text-lg font-medium hidden sm:inline">Tulme Studio</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 text-sm">
+                <a href="#about" class="hover:text-[#C4785A] transition-colors animate-fade-up delay-1">About</a>
+                <a href="#services" class="hover:text-[#C4785A] transition-colors animate-fade-up delay-2">Services</a>
+                <a href="#process" class="hover:text-[#C4785A] transition-colors animate-fade-up delay-3">Process</a>
+                <button class="btn-warm px-6 py-2.5 rounded-full text-sm font-medium animate-fade-up delay-4">
+                    Get Started
+                </button>
+            </div>
+
+            <!-- Mobile menu button -->
+            <button class="md:hidden w-10 h-10 flex items-center justify-center">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-24 pb-12 px-6 md:px-12 relative overflow-hidden">
+        <!-- Background decorative elements -->
+        <div class="absolute top-20 right-0 w-96 h-96 sun-circle opacity-10 animate-float" style="animation-delay: -1s;"></div>
+        <div class="absolute bottom-20 left-10 w-64 h-64 olive-blob blob animate-wave"></div>
+
+        <div class="max-w-7xl mx-auto w-full">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <!-- Content -->
+                <div class="order-2 lg:order-1">
+                    <div class="inline-flex items-center gap-3 bg-[#F5EDE4] rounded-full px-5 py-2 mb-8 animate-fade-up">
+                        <span class="w-2 h-2 rounded-full bg-[#C4785A]"></span>
+                        <span class="text-sm font-medium text-[#5D6B4C]">Poland → Costa Blanca</span>
+                    </div>
+
+                    <h1 class="font-display text-5xl md:text-6xl lg:text-7xl font-medium leading-[1.1] mb-6 animate-fade-up delay-1">
+                        Design.<br>
+                        <span class="text-[#C4785A]">Source.</span><br>
+                        Deliver.
+                    </h1>
+
+                    <p class="text-lg text-[#5D6B4C] max-w-md mb-10 animate-fade-up delay-2">
+                        More than interior design. We bridge premium European manufacturing 
+                        with your Mediterranean sanctuary. European precision, Spanish sunshine.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 animate-fade-up delay-3">
+                        <button class="btn-warm px-8 py-4 rounded-full font-medium">
+                            Start Your Journey
+                        </button>
+                        <button class="btn-outline px-8 py-4 rounded-full font-medium">
+                            Learn More
+                        </button>
+                    </div>
+
+                    <!-- Stats row -->
+                    <div class="flex gap-12 mt-12 animate-fade-up delay-4">
+                        <div>
+                            <span class="font-display text-3xl font-medium text-[#C4785A]">100%</span>
+                            <p class="text-sm text-[#5D6B4C] mt-1">Quality Verified</p>
+                        </div>
+                        <div>
+                            <span class="font-display text-3xl font-medium text-[#C4785A]">Direct</span>
+                            <p class="text-sm text-[#5D6B4C] mt-1">Factory Access</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="order-1 lg:order-2 relative animate-scale-in delay-2">
+                    <div class="image-warm aspect-[4/5] bg-[#F5EDE4]">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=600&q=80" 
+                             alt="Mediterranean interior" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    
+                    <!-- Floating badge -->
+                    <div class="absolute -bottom-6 -left-6 bg-white rounded-2xl p-6 shadow-xl max-w-[200px] animate-float">
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 bg-[#5D6B4C] rounded-full flex items-center justify-center">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                                </svg>
+                            </div>
+                            <span class="font-display font-medium">No Mañana</span>
+                        </div>
+                        <p class="text-sm text-[#5D6B4C]">European precision, always on time</p>
+                    </div>
+
+                    <!-- Corner accent -->
+                    <div class="absolute -top-4 -right-4 w-24 h-24 border-2 border-[#C4785A] rounded-full opacity-30"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wave Divider -->
+    <div class="wave-divider"></div>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 px-6 md:px-12 bg-[#F5EDE4]">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Image Grid -->
+                <div class="grid grid-cols-2 gap-4 reveal">
+                    <div class="image-warm aspect-[3/4] col-span-1 bg-white">
+                        <img src="https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=400&q=80" 
+                             alt="Craftsmanship" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="image-warm aspect-square col-span-1 self-end bg-white">
+                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?w=400&q=80" 
+                             alt="Interior detail" 
+                             class="w-full h-full object-cover">
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="reveal">
+                    <span class="text-[#C4785A] text-sm font-medium tracking-wider uppercase">Our Story</span>
+                    <h2 class="font-display text-4xl md:text-5xl font-medium mt-4 mb-6">
+                        Bridging continents with craftsmanship
+                    </h2>
+                    <p class="text-[#5D6B4C] text-lg mb-6">
+                        Poland is one of the world's leading exporters of high-quality furniture 
+                        and construction materials. Our industry combines generations of craftsmanship 
+                        with advanced manufacturing technologies.
+                    </p>
+                    <p class="text-[#5D6B4C] mb-8">
+                        For discerning clients in Spain, this means access to an unrivaled price-to-quality 
+                        ratio. This isn't about cutting corners—it's about intelligent sourcing.
+                    </p>
+                    
+                    <div class="flex items-center gap-6">
+                        <div class="w-14 h-14 sun-circle flex items-center justify-center">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                                <path d="M2 17l10 5 10-5"></path>
+                                <path d="M2 12l10 5 10-5"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <p class="font-display font-medium text-lg">Bulletproof Supply Chain</p>
+                            <p class="text-sm text-[#5D6B4C]">From factory to your door, seamlessly</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 px-6 md:px-12 bg-[#FFFBF7]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <span class="text-[#C4785A] text-sm font-medium tracking-wider uppercase">What We Offer</span>
+                <h2 class="font-display text-4xl md:text-5xl font-medium mt-4">
+                    Premium services,<br>delivered with care
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="card-warm p-8 reveal">
+                    <div class="w-14 h-14 bg-[#F5EDE4] rounded-2xl flex items-center justify-center mb-6">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C4785A" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="3" y1="9" x2="21" y2="9"></line>
+                            <line x1="9" y1="21" x2="9" y2="9"></line>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl font-medium mb-3">Bespoke Carpentry</h3>
+                    <p class="text-[#5D6B4C] text-sm">
+                        Custom kitchens, wardrobes, and built-in furniture crafted by masters. 
+                        Quality rivaling top Italian brands.
+                    </p>
+                </div>
+
+                <div class="card-warm p-8 reveal">
+                    <div class="w-14 h-14 bg-[#F5EDE4] rounded-2xl flex items-center justify-center mb-6">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#5D6B4C" stroke-width="1.5">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="9" y1="3" x2="9" y2="21"></line>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl font-medium mb-3">Window Systems</h3>
+                    <p class="text-[#5D6B4C] text-sm">
+                        High-performance windows including passive house standards. 
+                        Superior insulation for Spanish climate.
+                    </p>
+                </div>
+
+                <div class="card-warm p-8 reveal">
+                    <div class="w-14 h-14 bg-[#F5EDE4] rounded-2xl flex items-center justify-center mb-6">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#4A6670" stroke-width="1.5">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl font-medium mb-3">Premium Upholstery</h3>
+                    <p class="text-[#5D6B4C] text-sm">
+                        World-class sofas, beds, and seating. High-end fabrics and 
+                        ergonomic designs for lasting comfort.
+                    </p>
+                </div>
+
+                <div class="card-warm p-8 reveal">
+                    <div class="w-14 h-14 bg-[#F5EDE4] rounded-2xl flex items-center justify-center mb-6">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C4785A" stroke-width="1.5">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polygon points="16.24 7.76 14.12 14.12 7.76 16.24 9.88 9.88 16.24 7.76"></polygon>
+                        </svg>
+                    </div>
+                    <h3 class="font-display text-xl font-medium mb-3">Full Logistics</h3>
+                    <p class="text-[#5D6B4C] text-sm">
+                        End-to-end from Polish factories to Costa Blanca. 
+                        Quality control, transport, on-site delivery.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process" class="py-24 px-6 md:px-12 bg-[#F5EDE4]">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16 reveal">
+                <span class="text-[#C4785A] text-sm font-medium tracking-wider uppercase">How It Works</span>
+                <h2 class="font-display text-4xl md:text-5xl font-medium mt-4">
+                    From vision to reality
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8 relative">
+                <!-- Connection line -->
+                <div class="hidden md:block absolute top-12 left-[12.5%] right-[12.5%] h-[2px] bg-gradient-to-r from-[#C4785A] via-[#5D6B4C] to-[#4A6670]"></div>
+
+                <div class="text-center reveal">
+                    <div class="w-24 h-24 sun-circle mx-auto flex items-center justify-center mb-6 relative z-10">
+                        <span class="font-display text-3xl font-medium text-white">1</span>
+                    </div>
+                    <h3 class="font-display text-xl font-medium mb-2">Sourcing</h3>
+                    <p class="text-sm text-[#5D6B4C]">Direct factory access, best prices, no middlemen</p>
+                </div>
+
+                <div class="text-center reveal">
+                    <div class="w-24 h-24 bg-[#5D6B4C] rounded-full mx-auto flex items-center justify-center mb-6 relative z-10">
+                        <span class="font-display text-3xl font-medium text-white">2</span>
+                    </div>
+                    <h3 class="font-display text-xl font-medium mb-2">Quality Check</h3>
+                    <p class="text-sm text-[#5D6B4C]">Personal verification before departure</p>
+                </div>
+
+                <div class="text-center reveal">
+                    <div class="w-24 h-24 bg-[#4A6670] rounded-full mx-auto flex items-center justify-center mb-6 relative z-10">
+                        <span class="font-display text-3xl font-medium text-white">3</span>
+                    </div>
+                    <h3 class="font-display text-xl font-medium mb-2">Transport</h3>
+                    <p class="text-sm text-[#5D6B4C]">Secure, coordinated logistics</p>
+                </div>
+
+                <div class="text-center reveal">
+                    <div class="w-24 h-24 sun-circle mx-auto flex items-center justify-center mb-6 relative z-10">
+                        <span class="font-display text-3xl font-medium text-white">4</span>
+                    </div>
+                    <h3 class="font-display text-xl font-medium mb-2">Delivery</h3>
+                    <p class="text-sm text-[#5D6B4C]">Direct to your Spanish property</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="py-16 px-6 md:px-12 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <p class="text-center text-sm text-[#5D6B4C] mb-10 reveal">Our Network of Elite Partners</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16">
+                <span class="partner-item font-display text-xl md:text-2xl text-[#2D2A26]">Grohe</span>
+                <span class="partner-item font-display text-xl md:text-2xl text-[#2D2A26]">Ronal</span>
+                <span class="partner-item font-display text-xl md:text-2xl text-[#2D2A26]">Aluplast</span>
+                <span class="partner-item font-display text-xl md:text-2xl text-[#2D2A26]">Rehau</span>
+                <span class="partner-item font-display text-xl md:text-2xl text-[#2D2A26]">Leds C4</span>
+                <span class="partner-item font-display text-xl md:text-2xl text-[#2D2A26]">Leon</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 px-6 md:px-12 bg-[#2D2A26] text-white relative overflow-hidden">
+        <!-- Background decoration -->
+        <div class="absolute top-0 right-0 w-96 h-96 sun-circle opacity-10"></div>
+        <div class="absolute bottom-0 left-0 w-64 h-64 olive-blob blob opacity-20"></div>
+
+        <div class="max-w-3xl mx-auto text-center relative z-10 reveal">
+            <span class="text-[#C4785A] text-sm font-medium tracking-wider uppercase">Ready to Begin?</span>
+            <h2 class="font-display text-4xl md:text-5xl lg:text-6xl font-medium mt-4 mb-6">
+                Let's create your<br>Mediterranean dream
+            </h2>
+            <p class="text-white/70 text-lg mb-10 max-w-xl mx-auto">
+                European design precision and a bulletproof supply chain. 
+                Your vision, delivered with care—always on time.
+            </p>
+            <button class="btn-warm px-10 py-5 rounded-full font-medium text-lg">
+                Start Your Project
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-6 md:px-12 bg-[#F5EDE4]">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 sun-circle flex items-center justify-center">
+                            <span class="text-white font-display font-semibold text-lg">T</span>
+                        </div>
+                        <span class="font-display text-lg font-medium">Tulme Studio</span>
+                    </div>
+                    <p class="text-sm text-[#5D6B4C]">
+                        European design precision and<br>a bulletproof supply chain.
+                    </p>
+                </div>
+
+                <div>
+                    <p class="font-medium mb-4">Locations</p>
+                    <p class="text-sm text-[#5D6B4C] mb-2">Poland — Headquarters</p>
+                    <p class="text-sm text-[#5D6B4C]">Costa Blanca — Operations</p>
+                </div>
+
+                <div>
+                    <p class="font-medium mb-4">Contact</p>
+                    <p class="text-sm text-[#5D6B4C] mb-2">hello@tulme.studio</p>
+                </div>
+            </div>
+
+            <div class="border-t border-[#2D2A26]/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-sm text-[#5D6B4C]">© 2024 Tulme Studio. All rights reserved.</p>
+                <div class="flex gap-6 text-sm">
+                    <a href="#" class="text-[#5D6B4C] hover:text-[#C4785A] transition-colors">Privacy</a>
+                    <a href="#" class="text-[#5D6B4C] hover:text-[#C4785A] transition-colors">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '-50px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>

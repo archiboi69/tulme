@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TULME STUDIO — Editorial Luxury</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+            --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+            --cream: #FAF8F5;
+            --gold: #C4A35A;
+            --charcoal: #1C1C1C;
+            --stone: #8B8680;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .font-serif {
+            font-family: 'Cormorant Garamond', serif;
+        }
+
+        /* Subtle grain texture */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            opacity: 0.015;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        /* Elegant animations */
+        @keyframes fade-in-up {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fade-in {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes line-grow {
+            0% { transform: scaleY(0); }
+            100% { transform: scaleY(1); }
+        }
+
+        @keyframes letter-spacing {
+            0% { letter-spacing: 0.5em; opacity: 0; }
+            100% { letter-spacing: 0.3em; opacity: 1; }
+        }
+
+        .animate-fade-up {
+            opacity: 0;
+            animation: fade-in-up 1s var(--ease-out) forwards;
+        }
+
+        .animate-fade {
+            opacity: 0;
+            animation: fade-in 1.2s var(--ease-out) forwards;
+        }
+
+        .animate-letters {
+            animation: letter-spacing 1.5s var(--ease-out) forwards;
+        }
+
+        .delay-1 { animation-delay: 0.15s; }
+        .delay-2 { animation-delay: 0.3s; }
+        .delay-3 { animation-delay: 0.45s; }
+        .delay-4 { animation-delay: 0.6s; }
+        .delay-5 { animation-delay: 0.75s; }
+        .delay-6 { animation-delay: 0.9s; }
+        .delay-7 { animation-delay: 1.05s; }
+
+        /* Button elegance */
+        .btn-elegant {
+            position: relative;
+            overflow: hidden;
+            transition: color 400ms ease, transform 160ms var(--ease-out);
+        }
+        .btn-elegant::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--charcoal);
+            transform: translateY(100%);
+            transition: transform 400ms var(--ease-out);
+        }
+        .btn-elegant:hover::before {
+            transform: translateY(0);
+        }
+        .btn-elegant:hover {
+            color: var(--cream);
+        }
+        .btn-elegant:active {
+            transform: scale(0.98);
+        }
+        .btn-elegant span {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Gold accent button */
+        .btn-gold {
+            background: var(--gold);
+            color: white;
+            transition: background 300ms ease, transform 160ms var(--ease-out);
+        }
+        .btn-gold:hover {
+            background: var(--charcoal);
+        }
+        .btn-gold:active {
+            transform: scale(0.98);
+        }
+
+        /* Vertical text */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+        }
+
+        /* Editorial image styling */
+        .editorial-image {
+            position: relative;
+            overflow: hidden;
+        }
+        .editorial-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border: 1px solid rgba(196, 163, 90, 0.3);
+            pointer-events: none;
+        }
+        .editorial-image img {
+            transition: transform 600ms var(--ease-out);
+        }
+        .editorial-image:hover img {
+            transform: scale(1.03);
+        }
+
+        /* Divider */
+        .divider {
+            width: 1px;
+            background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+        }
+
+        /* Pull quote */
+        .pull-quote {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .pull-quote::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--gold);
+        }
+
+        /* Service item */
+        .service-item {
+            position: relative;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(28, 28, 28, 0.1);
+            transition: padding-left 400ms var(--ease-out);
+        }
+        .service-item:hover {
+            padding-left: 1rem;
+        }
+        .service-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 400ms var(--ease-out);
+        }
+        .service-item:hover::before {
+            width: 3rem;
+        }
+
+        /* Partner logos */
+        .partner-item {
+            opacity: 0.4;
+            transition: opacity 400ms ease;
+        }
+        .partner-item:hover {
+            opacity: 1;
+        }
+
+        /* Scroll reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 px-8 md:px-16 py-8 flex justify-between items-center bg-gradient-to-b from-[#FAF8F5] via-[#FAF8F5]/90 to-transparent">
+        <div class="animate-fade-up">
+            <span class="font-serif text-2xl font-medium tracking-wide">Tulme</span>
+            <span class="text-xs text-stone ml-2 tracking-widest uppercase">Studio</span>
+        </div>
+        <div class="hidden md:flex items-center gap-12 text-sm tracking-wider animate-fade-up delay-1">
+            <a href="#about" class="hover:text-[#C4A35A] transition-colors">About</a>
+            <a href="#services" class="hover:text-[#C4A35A] transition-colors">Services</a>
+            <a href="#philosophy" class="hover:text-[#C4A35A] transition-colors">Philosophy</a>
+            <a href="#contact" class="btn-elegant border border-charcoal px-6 py-2">
+                <span>Inquire</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-24">
+        <div class="w-full px-8 md:px-16 grid lg:grid-cols-2 gap-16 items-center">
+            <!-- Left Content -->
+            <div class="lg:pr-12">
+                <p class="text-xs tracking-[0.3em] text-[#C4A35A] uppercase mb-8 animate-letters">
+                    Interior Design & Sourcing
+                </p>
+                
+                <h1 class="font-serif text-5xl md:text-7xl lg:text-8xl font-light leading-[1.05] mb-8 animate-fade-up delay-1">
+                    Design.<br>
+                    <em class="font-normal">Source.</em><br>
+                    Deliver.
+                </h1>
+
+                <p class="text-lg text-[#8B8680] max-w-md mb-12 animate-fade-up delay-2">
+                    More than interior design. We are your strategic sourcing partners, bridging premium European manufacturing with your Spanish sanctuary.
+                </p>
+
+                <div class="flex flex-col sm:flex-row gap-4 animate-fade-up delay-3">
+                    <button class="btn-gold px-10 py-4 text-sm tracking-wider">
+                        Begin Your Journey
+                    </button>
+                    <button class="btn-elegant border border-charcoal px-10 py-4 text-sm tracking-wider">
+                        <span>Our Philosophy</span>
+                    </button>
+                </div>
+
+                <div class="flex items-center gap-8 mt-16 text-xs tracking-wider text-[#8B8680] animate-fade-up delay-4">
+                    <span>Poland</span>
+                    <span class="w-12 h-[1px] bg-[#C4A35A]"></span>
+                    <span>Costa Blanca</span>
+                </div>
+            </div>
+
+            <!-- Right Image -->
+            <div class="relative animate-fade delay-3">
+                <div class="editorial-image aspect-[4/5] bg-stone/10">
+                    <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80" 
+                         alt="Luxury interior" 
+                         class="w-full h-full object-cover">
+                </div>
+                
+                <!-- Floating caption -->
+                <div class="absolute -bottom-8 -left-8 bg-white p-6 shadow-xl max-w-xs">
+                    <p class="font-serif text-lg italic text-[#8B8680]">
+                        "European precision meets Mediterranean living"
+                    </p>
+                </div>
+
+                <!-- Issue number -->
+                <div class="absolute -top-4 -right-4 font-serif text-8xl font-light text-[#C4A35A]/20">
+                    №1
+                </div>
+            </div>
+        </div>
+
+        <!-- Vertical text decoration -->
+        <div class="fixed right-8 top-1/2 -translate-y-1/2 hidden xl:block">
+            <p class="vertical-text text-xs tracking-[0.5em] text-stone/40 uppercase">
+                Refuse to Compromise
+            </p>
+        </div>
+    </section>
+
+    <!-- Statement Band -->
+    <section class="py-20 bg-[#1C1C1C] text-[#FAF8F5]">
+        <div class="px-8 md:px-16 max-w-5xl mx-auto text-center">
+            <p class="font-serif text-2xl md:text-4xl font-light leading-relaxed animate-fade-up">
+                Poland is one of the world's leading exporters of high-quality furniture and construction materials. 
+                <span class="text-[#C4A35A]">This isn't about cutting corners — it's about intelligent sourcing.</span>
+            </p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-32 px-8 md:px-16">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-12 gap-16">
+            <!-- Left Column -->
+            <div class="lg:col-span-5 reveal">
+                <div class="editorial-image aspect-[3/4] bg-stone/10 mb-8">
+                    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=600&q=80" 
+                         alt="Craftsmanship" 
+                         class="w-full h-full object-cover">
+                </div>
+                <p class="text-xs tracking-widest text-stone uppercase">Fig. 01 — Master Craftsmanship</p>
+            </div>
+
+            <!-- Right Column -->
+            <div class="lg:col-span-6 lg:col-start-7 flex flex-col justify-center reveal">
+                <p class="text-xs tracking-[0.3em] text-[#C4A35A] uppercase mb-6">The Studio</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-light mb-8">
+                    An architect's eye.<br>A merchant's network.
+                </h2>
+                <div class="pull-quote mb-8">
+                    <p class="text-[#8B8680] leading-relaxed">
+                        We combine generations of European craftsmanship with the most advanced manufacturing technologies. 
+                        For discerning clients in Spain, this means access to an unrivaled price-to-quality ratio.
+                    </p>
+                </div>
+                <p class="text-[#8B8680] leading-relaxed mb-8">
+                    Operating between Poland and the Costa Blanca, we've built a bulletproof supply chain that 
+                    eliminates the frustration of local delays. No more "mañana" — only precision and punctuality.
+                </p>
+                <a href="#services" class="inline-flex items-center gap-4 text-sm tracking-wider group">
+                    <span class="border-b border-charcoal pb-1 group-hover:border-[#C4A35A] transition-colors">
+                        Explore Our Services
+                    </span>
+                    <span class="group-hover:translate-x-2 transition-transform">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-32 px-8 md:px-16 bg-[#F5F3F0]">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid lg:grid-cols-12 gap-16 mb-20">
+                <div class="lg:col-span-4 reveal">
+                    <p class="text-xs tracking-[0.3em] text-[#C4A35A] uppercase mb-4">What We Offer</p>
+                    <h2 class="font-serif text-4xl md:text-5xl font-light">
+                        Curated Services
+                    </h2>
+                </div>
+                <div class="lg:col-span-6 lg:col-start-7 flex items-end reveal">
+                    <p class="text-[#8B8680]">
+                        From bespoke millwork to complete logistics management, 
+                        every service is designed to deliver European excellence to your doorstep.
+                    </p>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-x-16 gap-y-12">
+                <div class="service-item reveal">
+                    <span class="font-serif text-6xl text-[#C4A35A]/30">01</span>
+                    <h3 class="font-serif text-2xl mt-4 mb-4">Bespoke Carpentry & Millwork</h3>
+                    <p class="text-[#8B8680] text-sm">
+                        Custom-made kitchens, wardrobes, and built-in furniture crafted by masters of detail. 
+                        Quality that rivals top-tier Italian brands.
+                    </p>
+                </div>
+
+                <div class="service-item reveal">
+                    <span class="font-serif text-6xl text-[#C4A35A]/30">02</span>
+                    <h3 class="font-serif text-2xl mt-4 mb-4">World-Class Window Systems</h3>
+                    <p class="text-[#8B8680] text-sm">
+                        High-performance windows including passive house standards, offering superior 
+                        insulation crucial for the Spanish climate.
+                    </p>
+                </div>
+
+                <div class="service-item reveal">
+                    <span class="font-serif text-6xl text-[#C4A35A]/30">03</span>
+                    <h3 class="font-serif text-2xl mt-4 mb-4">Premium Upholstery & Furniture</h3>
+                    <p class="text-[#8B8680] text-sm">
+                        Access to world-class sofas, beds, and seating with high-end fabrics and 
+                        ergonomic designs built for durability.
+                    </p>
+                </div>
+
+                <div class="service-item reveal">
+                    <span class="font-serif text-6xl text-[#C4A35A]/30">04</span>
+                    <h3 class="font-serif text-2xl mt-4 mb-4">End-to-End Logistics</h3>
+                    <p class="text-[#8B8680] text-sm">
+                        Complete supply chain management from Polish factories to your Costa Blanca 
+                        property. Quality control, secure transport, on-site delivery.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="philosophy" class="py-32 px-8 md:px-16">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-20 reveal">
+                <p class="text-xs tracking-[0.3em] text-[#C4A35A] uppercase mb-4">Our Process</p>
+                <h2 class="font-serif text-4xl md:text-5xl font-light max-w-2xl mx-auto">
+                    From Vision to Reality, Without Compromise
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 rounded-full border border-[#C4A35A] flex items-center justify-center mx-auto mb-6">
+                        <span class="font-serif text-xl text-[#C4A35A]">I</span>
+                    </div>
+                    <h4 class="font-serif text-lg mb-2">Sourcing</h4>
+                    <p class="text-sm text-[#8B8680]">Direct access to Polish factories. Best prices, no middlemen.</p>
+                </div>
+
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 rounded-full border border-[#C4A35A] flex items-center justify-center mx-auto mb-6">
+                        <span class="font-serif text-xl text-[#C4A35A]">II</span>
+                    </div>
+                    <h4 class="font-serif text-lg mb-2">Quality Control</h4>
+                    <p class="text-sm text-[#8B8680]">Personal verification of every item before departure.</p>
+                </div>
+
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 rounded-full border border-[#C4A35A] flex items-center justify-center mx-auto mb-6">
+                        <span class="font-serif text-xl text-[#C4A35A]">III</span>
+                    </div>
+                    <h4 class="font-serif text-lg mb-2">Logistics</h4>
+                    <p class="text-sm text-[#8B8680]">Coordinated transport ensuring safe, timely arrival.</p>
+                </div>
+
+                <div class="text-center reveal">
+                    <div class="w-16 h-16 rounded-full border border-[#C4A35A] flex items-center justify-center mx-auto mb-6">
+                        <span class="font-serif text-xl text-[#C4A35A]">IV</span>
+                    </div>
+                    <h4 class="font-serif text-lg mb-2">Delivery</h4>
+                    <p class="text-sm text-[#8B8680]">Direct to your construction site, anywhere in Spain.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section class="py-20 px-8 md:px-16 border-t border-b border-stone/20">
+        <div class="max-w-7xl mx-auto">
+            <p class="text-xs tracking-[0.3em] text-[#C4A35A] uppercase mb-12 text-center reveal">Our Network of Elite Partners</p>
+            <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20">
+                <span class="partner-item font-serif text-2xl text-charcoal">Grohe</span>
+                <span class="partner-item font-serif text-2xl text-charcoal">Ronal</span>
+                <span class="partner-item font-serif text-2xl text-charcoal">Aluplast</span>
+                <span class="partner-item font-serif text-2xl text-charcoal">Rehau</span>
+                <span class="partner-item font-serif text-2xl text-charcoal">Leds C4</span>
+                <span class="partner-item font-serif text-2xl text-charcoal">Leon</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA -->
+    <section id="contact" class="py-32 px-8 md:px-16">
+        <div class="max-w-4xl mx-auto text-center reveal">
+            <p class="text-xs tracking-[0.3em] text-[#C4A35A] uppercase mb-6">Begin Your Project</p>
+            <h2 class="font-serif text-4xl md:text-6xl font-light mb-8">
+                Ready to experience<br>European precision?
+            </h2>
+            <p class="text-[#8B8680] max-w-xl mx-auto mb-12">
+                Let's discuss your vision. Whether you're furnishing a new property or 
+                renovating your Mediterranean retreat, we're here to make it exceptional.
+            </p>
+            <button class="btn-gold px-12 py-5 text-sm tracking-wider">
+                Schedule a Consultation
+            </button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 px-8 md:px-16 bg-[#1C1C1C] text-[#FAF8F5]">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-3 gap-12">
+            <div>
+                <span class="font-serif text-2xl">Tulme Studio</span>
+                <p class="text-sm text-[#8B8680] mt-4">
+                    European design precision and<br>a bulletproof supply chain.
+                </p>
+            </div>
+            <div class="text-sm text-[#8B8680]">
+                <p class="mb-2">Poland — Headquarters</p>
+                <p>Costa Blanca — Operations</p>
+            </div>
+            <div class="text-sm text-[#8B8680] md:text-right">
+                <p class="mb-4">hello@tulme.studio</p>
+                <p>© 2024 Tulme Studio</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll reveal
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '-50px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+    </script>
+</body>
+</html>

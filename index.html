@@ -1,392 +1,337 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
-
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tulme Studio | Premium Interiors</title>
-    <!-- Tailwind CSS -->
+    <title>Tulme Studio | Design Proposals</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter as a clean fallback for Gill Sans -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
+    
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['"Gill Sans"', '"Gill Sans MT"', 'Calibri', 'Inter', 'sans-serif'],
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        serif: ['Playfair Display', 'Georgia', 'serif'],
                     },
                     colors: {
-                        black: '#0f0f0f',
-                        white: '#ffffff',
+                        ink: '#0a0a0a',
+                        paper: '#fafafa',
+                        stone: '#737373',
                     }
                 }
             }
         }
     </script>
+    
     <style>
+        :root {
+            --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        
         body {
-            background-color: #ffffff;
-            color: #0f0f0f;
-            /* Subtle grain effect for that editorial print feel */
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            background: linear-gradient(180deg, #fafafa 0%, #f0f0f0 100%);
+            min-height: 100vh;
         }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
+        
+        .card {
+            transition: transform 0.4s var(--ease-out), box-shadow 0.4s var(--ease-out);
         }
-
-        ::-webkit-scrollbar-track {
-            background: #ffffff;
-            border-left: 1px solid #0f0f0f;
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.18);
         }
-
-        ::-webkit-scrollbar-thumb {
-            background: #0f0f0f;
+        
+        .card:active {
+            transform: translateY(-4px) scale(0.99);
         }
-
-        /* Editorial borders */
-        .border-editorial {
-            border: 1px solid #0f0f0f;
+        
+        .card-image {
+            transition: transform 0.6s var(--ease-out);
         }
-
-        .border-b-editorial {
-            border-bottom: 1px solid #0f0f0f;
+        
+        .card:hover .card-image {
+            transform: scale(1.05);
         }
-
-        .border-t-editorial {
-            border-top: 1px solid #0f0f0f;
+        
+        .tag {
+            transition: background-color 0.2s ease, color 0.2s ease;
         }
-
-        .border-r-editorial {
-            border-right: 1px solid #0f0f0f;
+        
+        .tag:hover {
+            background-color: #0a0a0a;
+            color: white;
         }
-
-        .border-l-editorial {
-            border-left: 1px solid #0f0f0f;
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 0.6s var(--ease-out) forwards;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.15s; }
+        .stagger-3 { animation-delay: 0.2s; }
+        .stagger-4 { animation-delay: 0.25s; }
+        .stagger-5 { animation-delay: 0.3s; }
+        .stagger-6 { animation-delay: 0.35s; }
+        .stagger-7 { animation-delay: 0.4s; }
+        .stagger-8 { animation-delay: 0.45s; }
+        .stagger-9 { animation-delay: 0.5s; }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #d4d4d4, transparent);
         }
     </style>
 </head>
 
-<body class="antialiased font-sans selection:bg-black selection:text-white flex flex-col items-center">
-
-    <!-- Wrapper for the "magazine page" max-width -->
-    <div class="w-full max-w-[1800px] border-x-0 xl:border-x xl:border-black min-h-screen flex flex-col">
-
-        <!-- Navigation (Structured, thin borders) -->
-        <nav
-            class="w-full border-b-editorial flex flex-col md:flex-row justify-between text-xs uppercase tracking-widest font-medium">
-            <div
-                class="p-4 md:p-6 border-b md:border-b-0 md:border-r-editorial flex-shrink-0 flex items-center justify-between">
-                <a href="#" class="text-base font-bold tracking-tight uppercase">Tulme Studio</a>
-                <button class="md:hidden">MENU</button>
+<body class="antialiased font-sans text-ink">
+    
+    <!-- Header -->
+    <header class="w-full max-w-7xl mx-auto px-6 pt-12 pb-8 fade-in">
+        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+            <div>
+                <p class="text-xs uppercase tracking-[0.3em] text-stone mb-3">Landing Page Proposals</p>
+                <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl font-medium tracking-tight">
+                    Tulme Studio
+                </h1>
             </div>
-
-            <div class="hidden md:flex flex-grow divide-x divide-black">
-                <a href="#about"
-                    class="p-6 flex-grow text-center hover:bg-black hover:text-white transition-colors">About</a>
-                <a href="#services"
-                    class="p-6 flex-grow text-center hover:bg-black hover:text-white transition-colors">Services</a>
-                <a href="#process"
-                    class="p-6 flex-grow text-center hover:bg-black hover:text-white transition-colors">Process</a>
-            </div>
-
-            <div class="hidden md:flex flex-shrink-0">
-                <a href="#contact"
-                    class="p-6 bg-black text-white hover:bg-white hover:text-black border-l-editorial transition-colors">
-                    Start Project
-                </a>
-            </div>
-        </nav>
-
-        <!-- Hero Section (Noise Inspiration: Huge text + Meta Data) -->
-        <header class="w-full border-b-editorial flex flex-col">
-            <!-- Top part: Giant Text & Table -->
-            <div class="flex flex-col lg:flex-row border-b-editorial">
-
-                <!-- Left: Huge Title -->
-                <div
-                    class="p-6 md:p-12 lg:w-2/3 border-b lg:border-b-0 lg:border-r-editorial flex flex-col justify-center">
-                    <h1 class="text-[12vw] lg:text-[7vw] leading-[0.9] font-semibold tracking-tighter mb-6 uppercase">
-                        Premium<br>Interiors.
-                    </h1>
-                    <p class="text-lg md:text-2xl font-light max-w-xl leading-tight">
-                        A cutting-edge design and sourcing studio bringing Northern European standards to the Costa
-                        Blanca.
-                    </p>
-                </div>
-
-                <!-- Right: Meta Data Grid (like the "Noise" reference) -->
-                <div class="lg:w-1/3 flex flex-col text-sm divide-y divide-black">
-                    <div class="p-6 flex justify-between">
-                        <span class="text-gray-500">(Location)</span>
-                        <span class="font-medium text-right">Costa Blanca, Spain<br>Poland</span>
+            <p class="text-stone text-sm max-w-xs leading-relaxed">
+                9 distinct design directions exploring premium aesthetics for an interior design studio.
+            </p>
+        </div>
+    </header>
+    
+    <!-- Divider -->
+    <div class="section-divider w-full max-w-7xl mx-auto fade-in stagger-1"></div>
+    
+    <!-- Direction Labels -->
+    <nav class="w-full max-w-7xl mx-auto px-6 py-6 fade-in stagger-1">
+        <div class="flex flex-wrap gap-3">
+            <span class="tag px-4 py-2 border border-ink/20 text-xs uppercase tracking-widest cursor-default">Editorial Direction</span>
+            <span class="tag px-4 py-2 border border-ink/20 text-xs uppercase tracking-widest cursor-default">Mediterranean Direction</span>
+            <span class="tag px-4 py-2 border border-ink/20 text-xs uppercase tracking-widest cursor-default">Hybrid</span>
+        </div>
+    </nav>
+    
+    <!-- Main Grid -->
+    <main class="w-full max-w-7xl mx-auto px-6 pb-16">
+        
+        <!-- Featured: Editorial Hybrid -->
+        <section class="mb-12 fade-in stagger-2">
+            <a href="proposal-0-editorial-hybrid.html" class="card block bg-white border border-ink/10 overflow-hidden group">
+                <div class="flex flex-col lg:flex-row">
+                    <div class="lg:w-1/2 aspect-video lg:aspect-auto overflow-hidden bg-neutral-100">
+                        <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=1200&q=80" 
+                             alt="Editorial Hybrid Preview" 
+                             class="card-image w-full h-full object-cover grayscale-[20%]">
                     </div>
-                    <div class="p-6 flex justify-between">
-                        <span class="text-gray-500">(Expertise)</span>
-                        <span class="font-medium text-right">Architecture<br>Bespoke Carpentry<br>Premium
-                            Sourcing</span>
-                    </div>
-                    <div class="p-6 flex justify-between items-center h-full bg-gray-50">
-                        <span class="text-gray-500">(Status)</span>
-                        <div class="flex items-center gap-2">
-                            <span class="relative flex h-3 w-3">
-                                <span
-                                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-black opacity-40"></span>
-                                <span class="relative inline-flex rounded-full h-3 w-3 bg-black"></span>
-                            </span>
-                            <span class="font-medium">Accepting Projects</span>
+                    <div class="lg:w-1/2 p-8 lg:p-12 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="px-3 py-1 bg-ink text-white text-[10px] uppercase tracking-widest">Featured</span>
+                                <span class="px-3 py-1 border border-ink/20 text-[10px] uppercase tracking-widest">Hybrid</span>
+                            </div>
+                            <h2 class="font-serif text-3xl lg:text-4xl font-medium tracking-tight mb-4">
+                                Editorial Hybrid
+                            </h2>
+                            <p class="text-stone leading-relaxed mb-6">
+                                A refined synthesis of editorial grid structure with Noise-inspired metadata sections. 
+                                Clean B&W aesthetic with structured typography and hover interactions.
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between pt-6 border-t border-ink/10">
+                            <span class="text-xs uppercase tracking-widest text-stone">Original Index Design</span>
+                            <span class="text-sm font-medium group-hover:translate-x-1 transition-transform">View Proposal →</span>
                         </div>
                     </div>
                 </div>
+            </a>
+        </section>
+        
+        <!-- Editorial Direction -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-8 fade-in stagger-3">
+                <h2 class="text-lg font-medium uppercase tracking-widest">Editorial Direction</h2>
+                <div class="flex-1 h-px bg-ink/10"></div>
+                <span class="text-xs text-stone">4 Proposals</span>
             </div>
-
-            <!-- Bottom part: Large Editorial Image -->
-            <div class="w-full aspect-[16/9] md:aspect-[21/9] bg-gray-200 overflow-hidden">
-                <img src="https://images.unsplash.com/photo-1600607686527-6fb886090705?auto=format&fit=crop&w=2400&q=80"
-                    alt="Minimalist Interior" class="w-full h-full object-cover grayscale-[30%]" />
-            </div>
-        </header>
-
-        <!-- About Me Section (Margiela Inspiration) -->
-        <section id="about" class="w-full border-b-editorial flex flex-col md:flex-row">
-            <!-- Left Column: Big Question -->
-            <div class="md:w-1/3 p-6 md:p-12 border-b md:border-b-0 md:border-r-editorial">
-                <h2 class="text-4xl md:text-5xl lg:text-6xl font-light tracking-tighter leading-none uppercase mb-8">
-                    Who is<br>Tulme<br>Studio?
-                </h2>
-                <div class="flex flex-col gap-4 text-xs uppercase tracking-widest font-medium border-t-editorial pt-6">
-                    <div class="flex justify-between"><span>Founder:</span> <span>Architect</span></div>
-                    <div class="flex justify-between"><span>Base:</span> <span>PL / ES</span></div>
-                    <div class="flex justify-between"><span>Focus:</span> <span>Quality & Logistics</span></div>
-                </div>
-            </div>
-
-            <!-- Right Column: Content & Image -->
-            <div class="md:w-2/3 flex flex-col">
-                <div class="p-6 md:p-12 text-lg md:text-xl font-light leading-relaxed max-w-3xl">
-                    <p class="mb-6">
-                        "Tulme" originates from a Polish word meaning to wrap someone in a warm, safe embrace. As an
-                        architect splitting my time between Poland and Spain, I realized expats often face a daunting
-                        reality: language barriers, delayed timelines, and compromised quality in the local market.
-                    </p>
-                    <p>
-                        I created this studio for clients who refuse to compromise. We merge refined European aesthetics
-                        with a bulletproof, in-house supply chain.
-                    </p>
-                </div>
-
-                <!-- Inner Grid for Image and Quote -->
-                <div class="flex flex-col md:flex-row border-t-editorial flex-grow">
-                    <div
-                        class="md:w-1/2 border-b md:border-b-0 md:border-r-editorial p-6 flex flex-col justify-center bg-gray-50">
-                        <p class="text-2xl lg:text-3xl font-light italic leading-tight mb-6">
-                            "We bring the quality you know, to the climate you love. No 'mañana' excuses."
-                        </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Editorial Original -->
+                <a href="proposal-2-editorial.html" class="card block bg-white border border-ink/10 overflow-hidden fade-in stagger-3">
+                    <div class="aspect-[4/3] overflow-hidden bg-neutral-100">
+                        <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&w=800&q=80" 
+                             alt="Editorial Luxury Preview" 
+                             class="card-image w-full h-full object-cover">
                     </div>
-                    <div class="md:w-1/2 aspect-square md:aspect-auto">
-                        <!-- Placeholder for your portrait or a detail shot -->
-                        <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?auto=format&fit=crop&w=800&q=80"
-                            alt="Studio Detail" class="w-full h-full object-cover grayscale" />
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                            <span class="text-[10px] uppercase tracking-widest text-stone">Original</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-medium tracking-tight mb-2">Editorial Luxury</h3>
+                        <p class="text-sm text-stone leading-relaxed">Elegant serif typography, cream and gold palette, magazine-inspired layout with refined hover states.</p>
                     </div>
-                </div>
+                </a>
+                
+                <!-- Margiela -->
+                <a href="proposal-2a-editorial-margiela.html" class="card block bg-white border border-ink/10 overflow-hidden fade-in stagger-4">
+                    <div class="aspect-[4/3] overflow-hidden bg-neutral-900">
+                        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=800&q=80" 
+                             alt="Margiela Preview" 
+                             class="card-image w-full h-full object-cover grayscale">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-2 h-2 rounded-full bg-neutral-400"></span>
+                            <span class="text-[10px] uppercase tracking-widest text-stone">Subproposal</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-medium tracking-tight mb-2">Margiela</h3>
+                        <p class="text-sm text-stone leading-relaxed">Stark black and white, "WHO IS" headline pattern, structured metadata grid with labels.</p>
+                    </div>
+                </a>
+                
+                <!-- Noise -->
+                <a href="proposal-2b-editorial-noise.html" class="card block bg-white border border-ink/10 overflow-hidden fade-in stagger-5">
+                    <div class="aspect-[4/3] overflow-hidden bg-amber-50">
+                        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" 
+                             alt="Noise Preview" 
+                             class="card-image w-full h-full object-cover sepia-[20%]">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                            <span class="text-[10px] uppercase tracking-widest text-stone">Subproposal</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-medium tracking-tight mb-2">Noise</h3>
+                        <p class="text-sm text-stone leading-relaxed">Bold headers with warm orange accent, (Challenge)/(Goal)/(Result) case study pattern.</p>
+                    </div>
+                </a>
+                
+                <!-- Classic -->
+                <a href="proposal-2c-editorial-classic.html" class="card block bg-white border border-ink/10 overflow-hidden fade-in stagger-6">
+                    <div class="aspect-[4/3] overflow-hidden bg-stone-100">
+                        <img src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=800&q=80" 
+                             alt="Classic Preview" 
+                             class="card-image w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-2 h-2 rounded-full bg-stone-400"></span>
+                            <span class="text-[10px] uppercase tracking-widest text-stone">Subproposal</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-medium tracking-tight mb-2">Classic Editorial</h3>
+                        <p class="text-sm text-stone leading-relaxed">Timeless editorial layout with generous whitespace, drop caps, and traditional grid.</p>
+                    </div>
+                </a>
+                
             </div>
         </section>
-
-        <!-- Services Section (Aimo Portfolio/Grid Inspiration) -->
-        <section id="services" class="w-full border-b-editorial">
-            <div class="p-6 border-b-editorial flex justify-between items-center">
-                <span class="text-sm font-medium uppercase tracking-widest">(Services)</span>
+        
+        <!-- Mediterranean Direction -->
+        <section class="mb-16">
+            <div class="flex items-center gap-4 mb-8 fade-in stagger-6">
+                <h2 class="text-lg font-medium uppercase tracking-widest">Mediterranean Direction</h2>
+                <div class="flex-1 h-px bg-ink/10"></div>
+                <span class="text-xs text-stone">4 Proposals</span>
             </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-black">
-
-                <!-- Service 1 -->
-                <div
-                    class="group flex flex-col h-full hover:bg-black hover:text-white transition-colors duration-300 cursor-pointer">
-                    <div class="aspect-[4/3] w-full border-b-editorial overflow-hidden bg-gray-100">
-                        <img src="https://images.unsplash.com/photo-1617103996702-96ff29b1c467?auto=format&fit=crop&w=800&q=80"
-                            alt="Sourcing"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                
+                <!-- Mediterranean Original -->
+                <a href="proposal-4-mediterranean.html" class="card block bg-white border border-ink/10 overflow-hidden fade-in stagger-6">
+                    <div class="aspect-[4/3] overflow-hidden bg-amber-50">
+                        <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=800&q=80" 
+                             alt="Mediterranean Modern Preview" 
+                             class="card-image w-full h-full object-cover">
                     </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div class="text-xs tracking-widest uppercase mb-4 opacity-50">01</div>
-                        <h3 class="text-2xl font-medium tracking-tight mb-4 uppercase">Premium<br>Sourcing</h3>
-                        <p class="font-light text-sm opacity-80 mt-auto leading-relaxed">
-                            Have a design but need materials? We supply and deliver top-tier windows, Grohe fixtures,
-                            and furniture directly from Poland to your site.
-                        </p>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-2 h-2 rounded-full bg-orange-400"></span>
+                            <span class="text-[10px] uppercase tracking-widest text-stone">Original</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-medium tracking-tight mb-2">Mediterranean Modern</h3>
+                        <p class="text-sm text-stone leading-relaxed">Warm terracotta and sand palette, organic rounded shapes, relaxed typography.</p>
                     </div>
-                </div>
-
-                <!-- Service 2 -->
-                <div
-                    class="group flex flex-col h-full hover:bg-black hover:text-white transition-colors duration-300 cursor-pointer">
-                    <div class="aspect-[4/3] w-full border-b-editorial overflow-hidden bg-gray-100">
-                        <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80"
-                            alt="Carpentry"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                </a>
+                
+                <!-- Coastal -->
+                <a href="proposal-4a-mediterranean-coastal.html" class="card block bg-white border border-ink/10 overflow-hidden fade-in stagger-7">
+                    <div class="aspect-[4/3] overflow-hidden bg-sky-50">
+                        <img src="https://images.unsplash.com/photo-1499793983690-e29da59ef1c2?auto=format&fit=crop&w=800&q=80" 
+                             alt="Coastal Preview" 
+                             class="card-image w-full h-full object-cover">
                     </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div class="text-xs tracking-widest uppercase mb-4 opacity-50">02</div>
-                        <h3 class="text-2xl font-medium tracking-tight mb-4 uppercase">Design &<br>Carpentry</h3>
-                        <p class="font-light text-sm opacity-80 mt-auto leading-relaxed">
-                            The custom package. Architectural design for your kitchens and wardrobes, executed and
-                            installed perfectly by our precision Polish carpenters.
-                        </p>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-2 h-2 rounded-full bg-sky-400"></span>
+                            <span class="text-[10px] uppercase tracking-widest text-stone">Subproposal</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-medium tracking-tight mb-2">Coastal Azure</h3>
+                        <p class="text-sm text-stone leading-relaxed">Ocean blues and sandy whites, wave-inspired curves, coastal villa aesthetic.</p>
                     </div>
-                </div>
-
-                <!-- Service 3 -->
-                <div
-                    class="group flex flex-col h-full hover:bg-black hover:text-white transition-colors duration-300 cursor-pointer">
-                    <div class="aspect-[4/3] w-full border-b-editorial overflow-hidden bg-gray-100">
-                        <img src="https://images.unsplash.com/photo-1600210491369-e753d80a41f3?auto=format&fit=crop&w=800&q=80"
-                            alt="Architecture"
-                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+                </a>
+                
+                <!-- Terracotta -->
+                <a href="proposal-4b-mediterranean-terracotta.html" class="card block bg-white border border-ink/10 overflow-hidden fade-in stagger-8">
+                    <div class="aspect-[4/3] overflow-hidden bg-orange-50">
+                        <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=800&q=80" 
+                             alt="Terracotta Preview" 
+                             class="card-image w-full h-full object-cover">
                     </div>
-                    <div class="p-6 flex flex-col flex-grow">
-                        <div class="text-xs tracking-widest uppercase mb-4 opacity-50">03</div>
-                        <h3 class="text-2xl font-medium tracking-tight mb-4 uppercase">Interior<br>Architecture</h3>
-                        <p class="font-light text-sm opacity-80 mt-auto leading-relaxed">
-                            From spatial planning to the final decorative touch. A comprehensive, turnkey design service
-                            tailored to the beautiful Mediterranean light.
-                        </p>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-2 h-2 rounded-full bg-orange-600"></span>
+                            <span class="text-[10px] uppercase tracking-widest text-stone">Subproposal</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-medium tracking-tight mb-2">Terracotta Earth</h3>
+                        <p class="text-sm text-stone leading-relaxed">Rich terracotta and olive tones, rustic warmth, artisanal craftsmanship focus.</p>
                     </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Process / More Info Section (Aimo Accordion Inspiration) -->
-        <section id="process" class="w-full border-b-editorial flex flex-col lg:flex-row">
-            <div
-                class="lg:w-1/2 p-6 md:p-12 border-b lg:border-b-0 lg:border-r-editorial bg-black text-white flex flex-col justify-between">
-                <div>
-                    <span class="text-sm font-medium uppercase tracking-widest text-gray-400 mb-8 block">(The
-                        Process)</span>
-                    <h2 class="text-4xl md:text-5xl font-light tracking-tighter uppercase leading-tight mb-6">
-                        How we deliver<br>perfection.
-                    </h2>
-                    <p class="text-gray-300 font-light max-w-md text-lg">
-                        Our secret weapon? We don't rely on third-party shippers. We operate our own transport fleet to
-                        guarantee flawless delivery.
-                    </p>
-                </div>
-                <!-- Partners List inside black box -->
-                <div class="mt-16 pt-8 border-t border-gray-800">
-                    <span class="text-xs uppercase tracking-widest text-gray-500 mb-4 block">Trusted Partners</span>
-                    <div class="flex flex-wrap gap-6 text-sm font-medium uppercase tracking-widest">
-                        <span>Grohe</span>
-                        <span>Ronal</span>
-                        <span>Furninova</span>
-                        <span>Windows 2000</span>
+                </a>
+                
+                <!-- Ibiza -->
+                <a href="proposal-4c-mediterranean-ibiza.html" class="card block bg-white border border-ink/10 overflow-hidden fade-in stagger-9">
+                    <div class="aspect-[4/3] overflow-hidden bg-neutral-50">
+                        <img src="https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?auto=format&fit=crop&w=800&q=80" 
+                             alt="Ibiza Preview" 
+                             class="card-image w-full h-full object-cover">
                     </div>
-                </div>
-            </div>
-
-            <!-- Stages List (Accordion style visual) -->
-            <div class="lg:w-1/2 flex flex-col divide-y divide-black">
-
-                <div class="p-6 md:p-8 flex items-start gap-6 hover:bg-gray-50 transition-colors">
-                    <span class="text-xs font-bold tracking-widest uppercase mt-1">01.</span>
-                    <div>
-                        <h4 class="text-xl font-medium uppercase mb-2">Initial Brief & Quote</h4>
-                        <p class="text-sm font-light text-gray-600">We discuss your property, needs, and select the
-                            right service tier—whether it's pure sourcing or full design.</p>
+                    <div class="p-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <span class="w-2 h-2 rounded-full bg-neutral-300"></span>
+                            <span class="text-[10px] uppercase tracking-widest text-stone">Subproposal</span>
+                        </div>
+                        <h3 class="font-serif text-xl font-medium tracking-tight mb-2">Ibiza White</h3>
+                        <p class="text-sm text-stone leading-relaxed">Crisp white minimalism, natural textures, bohemian luxury inspired by Balearic architecture.</p>
                     </div>
-                </div>
-
-                <div class="p-6 md:p-8 flex items-start gap-6 hover:bg-gray-50 transition-colors">
-                    <span class="text-xs font-bold tracking-widest uppercase mt-1">02.</span>
-                    <div>
-                        <h4 class="text-xl font-medium uppercase mb-2">Curation & Ordering</h4>
-                        <p class="text-sm font-light text-gray-600">We leverage our network in Poland to secure the
-                            highest quality materials, windows, and custom carpentry at competitive rates.</p>
-                    </div>
-                </div>
-
-                <div class="p-6 md:p-8 flex items-start gap-6 hover:bg-gray-50 transition-colors">
-                    <span class="text-xs font-bold tracking-widest uppercase mt-1">03.</span>
-                    <div>
-                        <h4 class="text-xl font-medium uppercase mb-2">In-House Logistics</h4>
-                        <p class="text-sm font-light text-gray-600">Your items are safely transported from Poland to
-                            Spain via our family-owned transport fleet. No delays, no lost cargo.</p>
-                    </div>
-                </div>
-
-                <div class="p-6 md:p-8 flex items-start gap-6 hover:bg-gray-50 transition-colors bg-gray-50">
-                    <span class="text-xs font-bold tracking-widest uppercase mt-1">04.</span>
-                    <div>
-                        <h4 class="text-xl font-medium uppercase mb-2">Installation</h4>
-                        <p class="text-sm font-light text-gray-600">For carpentry projects, our trusted Polish craftsmen
-                            arrive on-site in Spain to ensure a flawless, millimetre-perfect installation.</p>
-                    </div>
-                </div>
-
+                </a>
+                
             </div>
         </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="w-full flex flex-col md:flex-row">
-            <div class="md:w-1/2 p-6 md:p-12 border-b md:border-b-0 md:border-r-editorial flex flex-col justify-center">
-                <h2 class="text-5xl md:text-7xl font-semibold tracking-tighter uppercase leading-[0.9] mb-6">
-                    Start<br>Project.
-                </h2>
-                <p class="text-lg font-light mb-8 max-w-sm">
-                    Leave your details and we will get back to you to discuss your property on the Costa Blanca.
-                </p>
-                <div class="text-sm font-medium uppercase tracking-widest space-y-2">
-                    <p>hello@tulmestudio.com</p>
-                    <p>+34 000 000 000</p>
-                </div>
-            </div>
-
-            <div class="md:w-1/2 p-6 md:p-12 bg-gray-50 flex items-center">
-                <form class="w-full max-w-md space-y-6">
-                    <div class="border-b-editorial pb-2">
-                        <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Name</label>
-                        <input type="text" class="w-full bg-transparent text-lg focus:outline-none"
-                            placeholder="Enter your name">
-                    </div>
-                    <div class="border-b-editorial pb-2">
-                        <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Email</label>
-                        <input type="email" class="w-full bg-transparent text-lg focus:outline-none"
-                            placeholder="Enter your email">
-                    </div>
-                    <div class="border-b-editorial pb-2">
-                        <label class="block text-xs uppercase tracking-widest text-gray-500 mb-2">Inquiry Type</label>
-                        <select class="w-full bg-transparent text-lg focus:outline-none appearance-none cursor-pointer">
-                            <option>Premium Sourcing Only</option>
-                            <option>Design & Carpentry</option>
-                            <option>Full Architecture</option>
-                        </select>
-                    </div>
-                    <button type="button"
-                        class="w-full bg-black text-white py-4 text-sm font-bold tracking-widest uppercase hover:bg-gray-800 transition-colors mt-8">
-                        Submit Request ->
-                    </button>
-                </form>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer
-            class="w-full border-t-editorial p-6 flex flex-col md:flex-row justify-between items-center text-xs uppercase tracking-widest font-medium">
-            <div class="mb-4 md:mb-0">&copy; 2026 TULME STUDIO.</div>
-            <div class="flex gap-6">
-                <a href="#" class="hover:opacity-50 transition-opacity">Instagram</a>
-                <a href="#" class="hover:opacity-50 transition-opacity">LinkedIn</a>
-            </div>
-            <div class="mt-4 md:mt-0 text-gray-500">Poland / Spain</div>
-        </footer>
-
-    </div>
-
+        
+    </main>
+    
+    <!-- Footer -->
+    <footer class="w-full max-w-7xl mx-auto px-6 py-8 border-t border-ink/10">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-stone">
+            <p>Tulme Studio — Design Proposals 2026</p>
+            <p class="text-xs uppercase tracking-widest">Poland / Costa Blanca, Spain</p>
+        </div>
+    </footer>
+    
 </body>
-
 </html>
