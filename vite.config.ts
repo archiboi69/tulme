@@ -9,7 +9,9 @@ import babel from "@rolldown/plugin-babel";
 
 const config = defineConfig({
   staged: {
-    "*": "vp check --fix",
+    "{src,public,docs}/**/*.{ts,tsx,js,jsx,css,md,html,json}": "vp check --fix",
+    "{vite.config.ts,package.json,tsconfig.json,components.json,README.md,AGENTS.md}":
+      "vp check --fix",
   },
   fmt: { ignorePatterns: ["**/routeTree.gen.ts"] },
   lint: { options: { typeAware: true, typeCheck: true } },
@@ -17,7 +19,7 @@ const config = defineConfig({
   plugins: [
     devtools(),
     tailwindcss(),
-    tanstackStart(),
+    tanstackStart({ prerender: { enabled: true } }),
     react(),
     babel({
       presets: [reactCompilerPreset()],
