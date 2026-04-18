@@ -3,7 +3,7 @@ import { Link } from "@tanstack/react-router";
 export default function Header() {
   return (
     <header className="absolute inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6 sm:pt-5 lg:px-8">
-      <nav className="hero-nav mx-auto flex w-full max-w-[1400px] items-center justify-between gap-4">
+      <nav className="hero-nav mx-auto flex w-full max-w-350 items-center justify-between gap-4">
         <Link to="/" className="text-sm font-medium tracking-[0.24em] no-underline uppercase">
           Tulme
         </Link>

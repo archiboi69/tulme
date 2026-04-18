@@ -31,7 +31,7 @@ export default function ProductCategoriesSection() {
       id="collections"
       className="bg-background px-4 py-6 scroll-mt-24 sm:px-6 sm:py-8 lg:px-8 lg:py-10"
     >
-      <div className="mx-auto w-full max-w-[1400px]">
+      <div className="mx-auto w-full max-w-350">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {showcaseItems.map((item) => (
             <article

@@ -10,9 +10,9 @@ export default function HeroSection() {
       <div className="hero-glow absolute inset-0" />
 
       <div className="relative flex min-h-svh flex-col px-4 pb-10 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-36">
-        <div className="mx-auto flex w-full max-w-[1400px] flex-1 flex-col justify-between">
+        <div className="mx-auto flex w-full max-w-350 flex-1 flex-col justify-between">
           <div className="flex flex-1 items-center justify-center">
-            <div className="max-w-[44rem] text-center animate-in fade-in slide-in-from-bottom-6 duration-700">
+            <div className="max-w-176 text-center animate-in fade-in slide-in-from-bottom-6 duration-700">
               <p className="hero-eyebrow mb-5 text-[0.68rem] font-medium tracking-[0.38em] uppercase sm:mb-6">
                 Tulme Studio
               </p>
