@@ -2,7 +2,7 @@ import { ArrowUpRight } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
-const email = "hello@tulme.com";
+const email = "hello@tulme.studio";
 const year = new Date().getFullYear();
 const subject = encodeURIComponent("Project inquiry for Tulme");
 const body = encodeURIComponent(
